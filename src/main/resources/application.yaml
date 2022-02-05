@@ -9,5 +9,19 @@ spring:
     url: jdbc:mysql://localhost:3306/appslapp
     username: computer
     password: Ratatui je best.
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: appslappmanagement@gmail.com
+    password: .N7w9buTyHY-B96
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  jpa:
+    hibernate:
+      ddl-auto: update
 
 debug: true

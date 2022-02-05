@@ -13,11 +13,13 @@ public class UserDetailsImp implements UserDetails {
     private final String password;
     private final List<GrantedAuthority> rolesAndAuthorities;
     private int associatedId;
+    private final boolean isEnabled;
 
     public UserDetailsImp(User user) {
         username = user.getUsername();
         password = user.getPassword();
         rolesAndAuthorities = List.of(new SimpleGrantedAuthority(user.getAuthority()));
+        isEnabled = user.isEnabled();
     }
 
     @Override
@@ -52,6 +54,6 @@ public class UserDetailsImp implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return isEnabled;
     }
 }
