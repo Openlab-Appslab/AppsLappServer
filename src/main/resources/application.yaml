@@ -5,10 +5,6 @@ spring:
     caffeine:
       spec: maximumSize=100000,expireAfterAccess=120s
   #Debug local only
-  datasource:
-    url: jdbc:mysql://localhost:3306/appslapp
-    username: computer
-    password: Ratatui je best.
   mail:
     host: smtp.gmail.com
     port: 587
