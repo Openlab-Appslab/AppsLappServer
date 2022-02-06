@@ -18,6 +18,7 @@ public class AuthenticationController {
         this.userService = userService;
     }
 
+    @CrossOrigin("*")
     @PostMapping("/api/auth/register")
     public ResponseEntity<Long> register(@Valid @RequestBody User user) {
         var id = userService.save(user);
