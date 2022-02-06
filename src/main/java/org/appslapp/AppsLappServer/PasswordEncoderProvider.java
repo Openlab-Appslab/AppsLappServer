@@ -1,4 +1,4 @@
-package org.appslapp.AppsLappServer.business.security;
+package org.appslapp.AppsLappServer;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
