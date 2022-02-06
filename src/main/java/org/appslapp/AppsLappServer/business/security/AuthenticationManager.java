@@ -10,8 +10,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
 
 import javax.persistence.Access;
+import java.util.Collections;
+import java.util.List;
 
 @EnableWebSecurity
 public class AuthenticationManager extends WebSecurityConfigurerAdapter {
@@ -24,6 +27,14 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedHeaders(
+                List.of("Authorization", "Cache-Control", "Content-Type", "X-PT-SESSION-ID", "NGSW-BYPASS"));
+        config.setAllowedOrigins(List.of("*"));
+        config.setAllowedMethods(List.of("GET", "POST", "DELETE", "PUT"));
+        config.setAllowCredentials(true);
+        config.setExposedHeaders(List.of("Authorization"));
+
         http.authorizeRequests()
                 .mvcMatchers("/api/auth/register").permitAll()
                 .mvcMatchers("/api/test").permitAll()
@@ -32,7 +43,8 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/secureTest").authenticated()
                 .anyRequest().denyAll()
                 .and()
-                .csrf().disable()
+                .csrf().disable().cors().configurationSource(request -> config)
+                .and()
                 .httpBasic();
         //deploy
         /*
