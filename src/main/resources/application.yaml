@@ -33,3 +33,5 @@ spring:
       ddl-auto: update
 
 debug: true
+server:
+  port: ${PORT:8080}
