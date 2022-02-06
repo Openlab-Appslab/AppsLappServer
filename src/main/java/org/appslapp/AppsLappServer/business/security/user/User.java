@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Pattern;
 
-@Entity
+@Entity(name = "user_data")
 @Getter
 @Setter
 @NoArgsConstructor
