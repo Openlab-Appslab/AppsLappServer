@@ -29,10 +29,7 @@ public class AuthenticationController {
         if (id == -2)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already exists.");
 
-        var response = new ResponseEntity<>(id, HttpStatus.OK);
-        response.getHeaders().add("Access-Control-Allow-Origin", "*");
-
-        return response;
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @GetMapping("/api/test")
