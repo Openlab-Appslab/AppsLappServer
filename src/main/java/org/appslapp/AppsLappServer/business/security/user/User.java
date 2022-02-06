@@ -1,5 +1,6 @@
 package org.appslapp.AppsLappServer.business.security.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,6 +31,7 @@ public class User {
 
     private String authority;
 
+    @JsonIgnore
     private boolean enabled;
 
     private String verificationCode;

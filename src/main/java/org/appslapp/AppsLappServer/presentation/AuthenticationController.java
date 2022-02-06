@@ -4,6 +4,7 @@ import org.appslapp.AppsLappServer.business.security.user.User;
 import org.appslapp.AppsLappServer.business.security.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -18,7 +19,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/api/auth/register")
-    public long register(@Valid @RequestBody User user) {
+    public ResponseEntity<Long> register(@Valid @RequestBody User user) {
         var id = userService.save(user);
 
         if (id == -1)
@@ -27,7 +28,10 @@ public class AuthenticationController {
         if (id == -2)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already exists.");
 
-        return id;
+        var response = new ResponseEntity<>(id, HttpStatus.OK);
+        response.getHeaders().add("Access-Control-Allow-Origin", "*");
+
+        return response;
     }
 
     @GetMapping("/api/test")
