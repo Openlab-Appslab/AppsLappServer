@@ -39,13 +39,15 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/auth/register").permitAll()
                 .mvcMatchers("/api/test").permitAll()
                 .mvcMatchers("/api/verify*").permitAll()
-                .mvcMatchers("/api/auth/login").hasAnyAuthority("ADMIN", "LAB_MASTER", "PUPIL")
+                .mvcMatchers("/api/auth/login").authenticated()
                 .mvcMatchers("/api/secureTest").authenticated()
                 .anyRequest().denyAll()
                 .and()
                 .csrf().disable().cors().configurationSource(request -> config)
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .oauth2Login();
         //deploy
         /*
         requiresChannel()
