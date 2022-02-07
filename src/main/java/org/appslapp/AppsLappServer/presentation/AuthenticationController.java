@@ -1,10 +1,13 @@
 package org.appslapp.AppsLappServer.presentation;
 
+import org.appslapp.AppsLappServer.business.security.UserDetailsImp;
 import org.appslapp.AppsLappServer.business.security.user.User;
 import org.appslapp.AppsLappServer.business.security.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -30,6 +33,23 @@ public class AuthenticationController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already exists.");
 
         return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @CrossOrigin("*")
+    @PostMapping("/api/auth/login")
+    public long login(@AuthenticationPrincipal UserDetailsImp details) {
+        return details.getId();
+    }
+
+    @CrossOrigin("*")
+    @PostMapping("/api/auth/resendEmail")
+    public long resend(@RequestParam String username) {
+        var id = userService.resendEmail(username);
+
+        if (id == -1)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, username);
+
+        return id;
     }
 
     @GetMapping("/api/test")

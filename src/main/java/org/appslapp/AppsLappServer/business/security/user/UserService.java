@@ -81,6 +81,19 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    public long resendEmail(String username) {
+        var user = getUserByName(username);
+        if (user.isEmpty())
+            return -1;
+        try {
+            sendVerificationEmail(user.get());
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return user.get().getId();
+    }
+
     private boolean isPasswordValid(String password) {
         var numberRegex = ".*[0-9]+.*";
         var lowerCaseLettersRegex = ".*[a-z]+.*";
