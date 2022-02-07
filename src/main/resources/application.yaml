@@ -6,9 +6,9 @@ spring:
       spec: maximumSize=100000,expireAfterAccess=120s
   #Release
   datasource:
-    url: ${MY_DATABASE_URL}
-    username: ${MY_DATABASE_USERNAME}
-    password: ${MY_DATABASE_PASSWORD}
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
 
@@ -20,8 +20,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: appslappmanagement@gmail.com
-    password: ${APPSLAPP_EMAIL_PASSWORD}
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
     properties:
       mail:
         smtp:
