@@ -6,21 +6,21 @@ spring:
       spec: maximumSize=100000,expireAfterAccess=120s
   #Release
   datasource:
-    url: jdbc:postgresql://ec2-54-216-90-155.eu-west-1.compute.amazonaws.com:5432/dbpo6jt9dd7hja
-    username: lkksxiirbgqdbj
-    password: 4a90439d38fe5d73319cf63247ac0bfc5468571f4e8412fa9428d0f1fea0af5e
+    url: ${MY_DATABASE_URL}
+    username: ${MY_DATABASE_USERNAME}
+    password: ${MY_DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   #Debug local only
   #datasource:
   #  url: jdbc:mysql://localhost:3306/appslapp
   #  username: computer
-  #  password: Ratatui je best.
+  #  password: ${MYSQL_DATABASE_PASSWORD}
   mail:
     host: smtp.gmail.com
     port: 587
     username: appslappmanagement@gmail.com
-    password: .N7w9buTyHY-B96
+    password: ${APPSLAPP_EMAIL_PASSWORD}
     properties:
       mail:
         smtp:

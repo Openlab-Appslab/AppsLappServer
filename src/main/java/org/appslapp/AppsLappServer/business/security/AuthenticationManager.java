@@ -62,7 +62,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder manager) throws Exception {
         manager.userDetailsService(service).passwordEncoder(getEncoder());
         manager.inMemoryAuthentication()
-                .withUser("admin").password(getEncoder().encode("test123456:)")).authorities("ADMIN")
+                .withUser("admin").password(getEncoder().encode(System.getenv("ADMIN_PASSWORD_FOR_APPSLAPP"))).authorities("ADMIN")
                 .and()
                 .passwordEncoder(getEncoder());
     }
