@@ -45,9 +45,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable().cors().configurationSource(request -> config)
                 .and()
-                .httpBasic()
-                .and()
-                .oauth2Login();
+                .httpBasic();
         //deploy
         /*
         requiresChannel()
