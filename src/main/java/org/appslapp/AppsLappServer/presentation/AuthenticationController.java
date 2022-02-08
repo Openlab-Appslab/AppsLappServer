@@ -37,7 +37,7 @@ public class AuthenticationController {
     }
 
     @CrossOrigin("*")
-    @PostMapping("/api/auth/login")
+    @GetMapping("/api/auth/login")
     public long login(@AuthenticationPrincipal UserDetailsImp details) {
         return details.getId();
     }
