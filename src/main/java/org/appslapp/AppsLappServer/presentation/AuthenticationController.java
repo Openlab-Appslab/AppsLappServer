@@ -25,6 +25,7 @@ public class AuthenticationController {
     @PostMapping("/api/auth/register")
     public ResponseEntity<Long> register(@Valid @RequestBody User user) {
         var id = userService.save(user);
+        System.out.println("Custom logs:" + id);
 
         if (id == -1)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong password");

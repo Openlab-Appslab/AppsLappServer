@@ -21,7 +21,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Pattern(regexp = "[a-zA-Z0-9._]{0,10}", message = "Name contains illegal characters or is too long.")
+    @Pattern(regexp = "[a-zA-Z0-9._]{4,10}", message = "Name contains illegal characters or is too long.")
     private String username;
 
     private String password;
