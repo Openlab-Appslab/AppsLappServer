@@ -70,6 +70,7 @@ public class AuthenticationController {
 
         if (user.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User doesn't exist");
+        userService.update(user.get());
 
         return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("https://appslappapp.vercel.app/emailV?email=" + user.get().getEmail())).build();
     }
