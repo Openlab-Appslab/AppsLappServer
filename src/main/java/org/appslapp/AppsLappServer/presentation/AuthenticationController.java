@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 public class AuthenticationController {
@@ -64,12 +65,12 @@ public class AuthenticationController {
     }
 
     @GetMapping("/api/verify")
-    public long verifyEmail(@RequestParam String code) {
+    public ResponseEntity<Void> verifyEmail(@RequestParam String code) {
         var user = userService.findByCode(code);
 
         if (user.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "User doesn't exist");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User doesn't exist");
 
-        return userService.enable(user.get());
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("https://https://appslappapp.vercel.app/emailV?email=" + user.get().getEmail())).build();
     }
 }

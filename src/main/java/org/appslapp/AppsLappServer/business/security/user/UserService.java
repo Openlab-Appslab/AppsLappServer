@@ -126,7 +126,7 @@ public class UserService {
         content = content.replace("[[name]]", user.getUsername());
 
         //https://apps-lapp-server.herokuapp.com/ for deploy http://localhost:8080/ for testing
-        String verifyURL = "https://appslappapp.vercel.app/" + "/emailV?code=" + user.getVerificationCode();
+        String verifyURL = "https://apps-lapp-server.herokuapp.com/" + "/api/verify?code=" + user.getVerificationCode();
 
         content = content.replace("[[URL]]", verifyURL);
 
