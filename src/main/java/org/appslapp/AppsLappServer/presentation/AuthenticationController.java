@@ -44,8 +44,8 @@ public class AuthenticationController {
     }
 
     @CrossOrigin("*")
-    @PostMapping("/api/auth/resendEmail")
-    public long resend(@RequestParam String username) {
+    @PostMapping("/api/auth/resendEmail/{username}")
+    public long resend(@PathVariable String username) {
         var id = userService.resendEmail(username);
 
         if (id == -1)
