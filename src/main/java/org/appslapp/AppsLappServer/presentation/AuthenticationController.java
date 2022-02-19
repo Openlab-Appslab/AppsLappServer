@@ -80,6 +80,8 @@ public class AuthenticationController {
 
     @GetMapping("/api/user/get")
     public Map<String, String> getRegisteredUser(@AuthenticationPrincipal UserDetailsImp principal) {
-        return Map.of("username", principal.getUsername());
+        return Map.of("username", principal.getUsername(),
+                "firstName", principal.getFirstName(),
+                "lastName", principal.getLastName());
     }
 }

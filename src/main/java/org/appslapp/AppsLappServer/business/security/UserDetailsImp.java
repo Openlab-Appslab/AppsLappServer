@@ -13,6 +13,8 @@ public class UserDetailsImp implements UserDetails {
     private final String password;
     private final List<GrantedAuthority> rolesAndAuthorities;
     private int associatedId;
+    private final String firstName;
+    private final String lastName;
     private final boolean isEnabled;
     private final long id;
 
@@ -22,10 +24,20 @@ public class UserDetailsImp implements UserDetails {
         rolesAndAuthorities = List.of(new SimpleGrantedAuthority(user.getAuthority()));
         isEnabled = user.isEnabled();
         id = user.getId();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
     }
 
     public long getId() {
         return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     @Override
