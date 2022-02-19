@@ -31,7 +31,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
         config.setAllowedHeaders(
                 List.of("Authorization", "Cache-Control", "Content-Type", "X-PT-SESSION-ID", "NGSW-BYPASS"));
         config.setAllowedOrigins(List.of("*"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT","OPTIONS","PATCH", "DELETE"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT", "OPTIONS", "PATCH", "DELETE"));
         config.setAllowCredentials(false);
         config.setExposedHeaders(List.of("Authorization"));
 
@@ -41,18 +41,17 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/verify*").permitAll()
                 .mvcMatchers("/api/auth/login").authenticated()
                 .mvcMatchers("/api/secureTest").authenticated()
+                .mvcMatchers("/api/user/get").authenticated()
                 .mvcMatchers("/api/adminDashboard").hasAnyAuthority("ADMIN")
                 .anyRequest().denyAll()
                 .and()
                 .csrf().disable().cors().configurationSource(request -> config)
                 .and()
-                .httpBasic();
-        //deploy
-        /*
-        requiresChannel()
-        .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
-        .requiresSecure()
-         */
+                .httpBasic()
+                .and()
+                .requiresChannel()
+                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+                .requiresSecure();
     }
 
     public PasswordEncoder getEncoder() {

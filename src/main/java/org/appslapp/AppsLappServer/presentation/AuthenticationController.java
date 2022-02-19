@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Map;
 
 @RestController
 public class AuthenticationController {
@@ -75,5 +76,10 @@ public class AuthenticationController {
 
         return ResponseEntity.status(HttpStatus.FOUND).location(
                 URI.create("https://appslappapp.vercel.app/emailV?email=" + user.get().getEmail())).build();
+    }
+
+    @GetMapping("/api/user/get")
+    public Map<String, String> getRegisteredUser(@AuthenticationPrincipal UserDetailsImp principal) {
+        return Map.of("username", principal.getUsername());
     }
 }
