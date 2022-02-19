@@ -41,6 +41,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/verify*").permitAll()
                 .mvcMatchers("/api/auth/login").authenticated()
                 .mvcMatchers("/api/secureTest").authenticated()
+                .mvcMatchers("/api/adminDashboard").hasAnyAuthority("ADMIN")
                 .anyRequest().denyAll()
                 .and()
                 .csrf().disable().cors().configurationSource(request -> config)
@@ -61,6 +62,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder manager) throws Exception {
         manager.userDetailsService(service).passwordEncoder(getEncoder());
+
         manager.inMemoryAuthentication()
                 .withUser("admin").password(getEncoder().encode(System.getenv().get("ADMIN_PASSWORD"))).authorities("ADMIN")
                 .and()
