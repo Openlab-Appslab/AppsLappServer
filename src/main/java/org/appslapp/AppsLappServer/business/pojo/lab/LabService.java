@@ -1,4 +1,4 @@
-package org.appslapp.AppsLappServer.business.lab;
+package org.appslapp.AppsLappServer.business.pojo.lab;
 
 import org.appslapp.AppsLappServer.persistance.LabRepository;
 import org.springframework.beans.factory.annotation.Autowired;

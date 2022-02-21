@@ -1,4 +1,4 @@
-package org.appslapp.AppsLappServer.business.user;
+package org.appslapp.AppsLappServer.business.pojo.user;
 
 import net.bytebuddy.utility.RandomString;
 import org.appslapp.AppsLappServer.persistance.UserRepository;

@@ -1,6 +1,6 @@
 package org.appslapp.AppsLappServer.business.security;
 
-import org.appslapp.AppsLappServer.business.user.User;
+import org.appslapp.AppsLappServer.business.pojo.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,4 @@
-package org.appslapp.AppsLappServer.business.lab;
+package org.appslapp.AppsLappServer.business.pojo.lab;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
