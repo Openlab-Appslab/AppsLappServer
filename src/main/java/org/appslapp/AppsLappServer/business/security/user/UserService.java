@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,6 +28,10 @@ public class UserService {
 
     public long update(User user) {
         return userRepository.save(user).getId();
+    }
+
+    public List<User> getStudents() {
+        return userRepository.findAllByAuthority("PUPIL");
     }
 
     public long enable(User user) {

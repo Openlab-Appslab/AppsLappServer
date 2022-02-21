@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -82,5 +83,10 @@ public class AuthenticationController {
     public Map<String, String> getRegisteredUser(@AuthenticationPrincipal UserDetailsImp principal) {
         return Map.of("firstName", principal.getFirstName(),
                 "lastName", principal.getLastName());
+    }
+
+    @GetMapping("/api/users/getStudents")
+    public List<User> getUsers() {
+        return userService.getStudents();
     }
 }
