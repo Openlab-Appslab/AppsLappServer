@@ -12,10 +12,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
-import java.util.Map;
 
 @RestController
+@RequestMapping("/api/auth/")
 public class AuthenticationController {
     private final UserService userService;
 
@@ -24,10 +23,9 @@ public class AuthenticationController {
     }
 
     @CrossOrigin("*")
-    @PostMapping("/api/auth/register")
+    @PostMapping("register")
     public ResponseEntity<Long> register(@Valid @RequestBody User user) {
         var id = userService.save(user);
-        System.out.println("Custom logs:" + id);
 
         if (id == -1)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong password");
@@ -39,13 +37,13 @@ public class AuthenticationController {
     }
 
     @CrossOrigin("*")
-    @GetMapping("/api/auth/login")
+    @GetMapping("login")
     public long login(@AuthenticationPrincipal UserDetailsImp details) {
         return details.getId();
     }
 
     @CrossOrigin("*")
-    @PostMapping("/api/auth/resendEmail/{username}")
+    @PostMapping("resendEmail/{username}")
     public long resend(@PathVariable String username) {
         var id = userService.resendEmail(username);
 
@@ -55,17 +53,7 @@ public class AuthenticationController {
         return id;
     }
 
-    @GetMapping("/api/test")
-    public int testApiLimiter() {
-        return 2;
-    }
-
-    @GetMapping("/api/secureTest")
-    public int testSecurity() {
-        return 3;
-    }
-
-    @GetMapping("/api/verify")
+    @GetMapping("verify")
     public ResponseEntity<Void> verifyEmail(@RequestParam String code) {
         var user = userService.findByCode(code);
 
@@ -77,16 +65,5 @@ public class AuthenticationController {
 
         return ResponseEntity.status(HttpStatus.FOUND).location(
                 URI.create("https://appslappapp.vercel.app/emailV?email=" + user.get().getEmail())).build();
-    }
-
-    @GetMapping("/api/user/get")
-    public Map<String, String> getRegisteredUser(@AuthenticationPrincipal UserDetailsImp principal) {
-        return Map.of("firstName", principal.getFirstName(),
-                "lastName", principal.getLastName());
-    }
-
-    @GetMapping("/api/users/getStudents")
-    public List<String> getUsers() {
-        return userService.getStudents();
     }
 }
