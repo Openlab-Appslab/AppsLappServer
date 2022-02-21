@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -30,8 +32,12 @@ public class UserService {
         return userRepository.save(user).getId();
     }
 
-    public List<User> getStudents() {
-        return userRepository.findAllByAuthority("PUPIL");
+    public Map<String, String> getStudents() {
+        var map = new HashMap<String, String>();
+        for (var user : userRepository.findAllByAuthority("PUPIL")) {
+            map.put("name", user.getFullName());
+        }
+        return map;
     }
 
     public long enable(User user) {

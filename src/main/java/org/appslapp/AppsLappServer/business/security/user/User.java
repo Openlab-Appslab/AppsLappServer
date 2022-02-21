@@ -1,6 +1,7 @@
 package org.appslapp.AppsLappServer.business.security.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -41,4 +42,8 @@ public class User {
 
     @JsonIgnore
     private String verificationCode;
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 }

@@ -86,7 +86,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/api/users/getStudents")
-    public List<User> getUsers() {
+    public Map<String, String> getUsers() {
         return userService.getStudents();
     }
 }
