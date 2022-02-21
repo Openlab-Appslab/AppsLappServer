@@ -34,7 +34,7 @@ public class UserService {
 
     public Map<String, String> getStudents() {
         var map = new HashMap<String, String>();
-        for (var user : userRepository.findAllByAuthority("PUPIL")) {
+        for (var user : userRepository.findAllByAuthorityAndEnabled("PUPIL", true)) {
             map.put("name", user.getFullName());
         }
         return map;
