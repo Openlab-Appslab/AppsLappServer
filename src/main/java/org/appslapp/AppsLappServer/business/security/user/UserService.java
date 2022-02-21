@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -32,10 +29,10 @@ public class UserService {
         return userRepository.save(user).getId();
     }
 
-    public Map<String, String> getStudents() {
-        var map = new HashMap<String, String>();
+    public List<String> getStudents() {
+        var map = new ArrayList<String>();
         for (var user : userRepository.findAllByAuthorityAndEnabled("PUPIL", true)) {
-            map.put(user.getUsername(), user.getFirstName() + " " + user.getLastName());
+            map.add(user.getFirstName() + " " + user.getLastName());
         }
         return map;
     }
@@ -51,7 +48,8 @@ public class UserService {
 
     public long save(User user) {
         //Check if username or email already exists
-        if (userRepository.findByUsername(user.getUsername()).isPresent() || userRepository.findByEmail(user.getEmail()).isPresent())
+        if (userRepository.findByUsername(user.getUsername()).isPresent() ||
+                userRepository.findByEmail(user.getEmail()).isPresent())
             return -2;
 
         //Check for user validity
