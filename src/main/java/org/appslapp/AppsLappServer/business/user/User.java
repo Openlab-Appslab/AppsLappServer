@@ -1,4 +1,4 @@
-package org.appslapp.AppsLappServer.business.security.user;
+package org.appslapp.AppsLappServer.business.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;

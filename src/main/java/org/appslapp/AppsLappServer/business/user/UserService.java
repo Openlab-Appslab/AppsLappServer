@@ -1,4 +1,4 @@
-package org.appslapp.AppsLappServer.business.security.user;
+package org.appslapp.AppsLappServer.business.user;
 
 import net.bytebuddy.utility.RandomString;
 import org.appslapp.AppsLappServer.persistance.UserRepository;

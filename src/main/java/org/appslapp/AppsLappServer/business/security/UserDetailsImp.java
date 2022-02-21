@@ -1,6 +1,6 @@
 package org.appslapp.AppsLappServer.business.security;
 
-import org.appslapp.AppsLappServer.business.security.user.User;
+import org.appslapp.AppsLappServer.business.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +12,6 @@ public class UserDetailsImp implements UserDetails {
     private final String username;
     private final String password;
     private final List<GrantedAuthority> rolesAndAuthorities;
-    private int associatedId;
     private final String firstName;
     private final String lastName;
     private final boolean isEnabled;
