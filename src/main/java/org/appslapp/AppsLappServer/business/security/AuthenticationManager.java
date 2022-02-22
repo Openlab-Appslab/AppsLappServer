@@ -33,12 +33,10 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .mvcMatchers("/api/auth/register").permitAll()
-                .mvcMatchers("/api/test").permitAll()
-                .mvcMatchers("/api/verify*").permitAll()
+                .mvcMatchers("/api/auth/verify*").permitAll()
                 .mvcMatchers("/api/auth/login").authenticated()
-                .mvcMatchers("/api/secureTest").authenticated()
                 .mvcMatchers("/api/user/get").authenticated()
-                .mvcMatchers("/api/users/getStudents").hasAnyAuthority("ADMIN", "LABMASTER")
+                .mvcMatchers("/api/management/getStudents").hasAnyAuthority("ADMIN", "LABMASTER")
                 .anyRequest().denyAll()
                 .and()
                 .csrf().disable().cors().configurationSource(request -> config)
@@ -59,7 +57,8 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
         manager.userDetailsService(service).passwordEncoder(getEncoder());
 
         manager.inMemoryAuthentication()
-                .withUser("admin").password(getEncoder().encode(System.getenv().get("ADMIN_PASSWORD"))).authorities("ADMIN")
+                .withUser("admin").password(getEncoder().encode(
+                        System.getenv().get("ADMIN_PASSWORD"))).authorities("ADMIN")
                 .and()
                 .passwordEncoder(getEncoder());
     }
