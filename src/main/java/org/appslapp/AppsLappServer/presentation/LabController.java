@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/management/")
@@ -30,7 +30,10 @@ public class LabController {
 
     @CrossOrigin("*")
     @PostMapping("createLab")
-    public long createLab(@Valid @RequestBody Lab lab, @AuthenticationPrincipal UserDetailsImp user) {
+    public long createLab(@RequestBody Map<String, String> test, @AuthenticationPrincipal UserDetailsImp user) {
+        Lab lab = new Lab();
+        lab.setName(test.get("name"));
+        lab.setStudentNames(List.of(test.get(("studentNames")).split(",,,")));
         lab.setLabMasterId(user.getId());
         return labService.save(lab);
     }
