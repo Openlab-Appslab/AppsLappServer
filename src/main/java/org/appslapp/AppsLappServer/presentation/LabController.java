@@ -28,12 +28,14 @@ public class LabController {
         return userService.getStudents();
     }
 
+    @CrossOrigin("*")
     @PostMapping("createLab")
     public long createLab(@Valid @RequestBody Lab lab, @AuthenticationPrincipal UserDetailsImp user) {
         lab.setLabMasterId(user.getId());
         return labService.save(lab);
     }
 
+    @CrossOrigin("*")
     @GetMapping("getLabs")
     public List<Lab> getLabs(@AuthenticationPrincipal UserDetailsImp user) {
         return labService.findAllByLabmasterId(user.getId());
