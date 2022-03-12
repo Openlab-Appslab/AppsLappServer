@@ -15,7 +15,7 @@ public class LabService {
     }
 
     public long save(Lab lab) {
-        return -1;
+        return labRepository.save(lab).getId();
     }
 
     public List<Lab> findAllByLabmasterId(long id) {
