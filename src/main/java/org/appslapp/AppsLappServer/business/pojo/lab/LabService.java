@@ -18,11 +18,7 @@ public class LabService {
         return -1;
     }
 
-    public long addStudents(List<Long> ids) {
-        return -1;
-    }
-
-    public long removeStudent(long id) {
-        return -1;
+    public List<Lab> findAllByLabmasterId(long id) {
+        return labRepository.findAllByLabMasterId(id);
     }
 }
