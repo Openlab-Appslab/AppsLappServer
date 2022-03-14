@@ -47,32 +47,24 @@ public class UserService {
     }
 
     public long save(User user) {
-        //Check if username or email already exists
         if (userRepository.findByUsername(user.getUsername()).isPresent() ||
                 userRepository.findByEmail(user.getEmail()).isPresent())
             return -2;
 
-        //Check for user validity
         if (!isPasswordValid(user.getPassword()))
             return -1;
 
-        //Set default authority if none was set before
         if (user.getAuthority() == null)
             user.setAuthority("PUPIL");
 
-        //Encrypts password
         user.setPassword(encoder.encode(user.getPassword()));
 
-        //Disable account
         user.setEnabled(false);
 
-        //Generate verification code
         user.setVerificationCode(RandomString.make(64));
 
-        //Save user so id can be generated
         var id = userRepository.save(user).getId();
 
-        //Send email
         try {
             sendVerificationEmail(user);
         } catch (MessagingException | UnsupportedEncodingException e) {
@@ -134,7 +126,6 @@ public class UserService {
 
         content = content.replace("[[name]]", user.getUsername());
 
-        //https://apps-lapp-server.herokuapp.com/ for deploy http://localhost:8080/ for testing
         String verifyURL = "https://apps-lapp-server.herokuapp.com" + "/api/auth/verify?code=" + user.getVerificationCode();
 
         content = content.replace("[[URL]]", verifyURL);

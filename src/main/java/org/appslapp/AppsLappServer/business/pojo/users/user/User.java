@@ -42,8 +42,4 @@ public class User {
 
     @JsonIgnore
     private String verificationCode;
-
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
 }

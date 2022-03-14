@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -19,7 +20,8 @@ public class Lab {
     private long id;
 
     @JsonIgnore
-    private long labMasterId;
+    @OneToOne(mappedBy = "lab")
+    private Labmaster labmaster;
 
     @ElementCollection
     private List<String> studentNames;

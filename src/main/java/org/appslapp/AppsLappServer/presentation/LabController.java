@@ -40,7 +40,6 @@ public class LabController {
         lab.setName(test.get("name"));
         lab.setStudentNames(List.of(test.get(("studentNames")).split(",,,")));
         System.out.println(lab.getStudentNames());
-        lab.setLabMasterId(user.getId());
         return labService.save(lab);
     }
 
