@@ -22,7 +22,7 @@ public class AuthenticationController {
         this.userService = userService;
     }
 
-    @CrossOrigin("*")
+    @CrossOrigin(origins = "appslappapp.vercel.app")
     @PostMapping("register")
     public ResponseEntity<Long> register(@Valid @RequestBody User user) {
         var id = userService.save(user);
@@ -36,13 +36,12 @@ public class AuthenticationController {
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-    @CrossOrigin("*")
     @GetMapping("login")
     public long login(@AuthenticationPrincipal UserDetailsImp details) {
         return details.getId();
     }
 
-    @CrossOrigin("*")
+    @CrossOrigin(origins = "appslappapp.vercel.app")
     @PostMapping("resendEmail/{username}")
     public long resend(@PathVariable String username) {
         var id = userService.resendEmail(username);

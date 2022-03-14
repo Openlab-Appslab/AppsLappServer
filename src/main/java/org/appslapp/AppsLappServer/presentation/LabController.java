@@ -34,7 +34,7 @@ public class LabController {
         return userService.getStudents();
     }
 
-    @CrossOrigin("*")
+    @CrossOrigin(origins = "appslappapp.vercel.app")
     @PostMapping("createLab")
     public long createLab(@RequestBody Map<String, String> test, @AuthenticationPrincipal UserDetailsImp user) {
         Lab lab = new Lab();
@@ -45,13 +45,12 @@ public class LabController {
         return labService.save(lab);
     }
 
-    @CrossOrigin("*")
     @GetMapping("getLabs")
     public List<Lab> getLabs(@AuthenticationPrincipal UserDetailsImp user) {
         return labService.findAllByLabmasterId(user.getId());
     }
 
-    @CrossOrigin("*")
+    @CrossOrigin(origins = "appslappapp.vercel.app")
     @PostMapping("createExercise")
     public Long createExercise(@Valid @RequestBody Exercise exercise) {
         return exerciseService.save(exercise);
