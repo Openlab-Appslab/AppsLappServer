@@ -1,7 +1,7 @@
-package org.appslapp.AppsLappServer.business.pojo.user;
+package org.appslapp.AppsLappServer.business.pojo.users.user;
 
 import net.bytebuddy.utility.RandomString;
-import org.appslapp.AppsLappServer.persistance.UserRepository;
+import org.appslapp.AppsLappServer.persistance.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

@@ -1,6 +1,6 @@
-package org.appslapp.AppsLappServer.business.security;
+package org.appslapp.AppsLappServer.business.security.User;
 
-import org.appslapp.AppsLappServer.business.pojo.user.UserService;
+import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

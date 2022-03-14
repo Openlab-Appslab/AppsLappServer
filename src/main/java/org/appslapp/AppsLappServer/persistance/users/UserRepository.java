@@ -1,6 +1,6 @@
-package org.appslapp.AppsLappServer.persistance;
+package org.appslapp.AppsLappServer.persistance.users;
 
-import org.appslapp.AppsLappServer.business.pojo.user.User;
+import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

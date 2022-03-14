@@ -1,8 +1,8 @@
 package org.appslapp.AppsLappServer.presentation;
 
-import org.appslapp.AppsLappServer.business.security.UserDetailsImp;
-import org.appslapp.AppsLappServer.business.pojo.user.User;
-import org.appslapp.AppsLappServer.business.pojo.user.UserService;
+import org.appslapp.AppsLappServer.business.security.User.UserDetailsImp;
+import org.appslapp.AppsLappServer.business.pojo.users.user.User;
+import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
