@@ -4,8 +4,6 @@ import org.appslapp.AppsLappServer.persistance.LabRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class LabService {
     private final LabRepository labRepository;
@@ -16,9 +14,5 @@ public class LabService {
 
     public long save(Lab lab) {
         return labRepository.save(lab).getId();
-    }
-
-    public List<Lab> findAllByLabmasterId(long id) {
-        return labRepository.findAllByLabMasterId(id);
     }
 }

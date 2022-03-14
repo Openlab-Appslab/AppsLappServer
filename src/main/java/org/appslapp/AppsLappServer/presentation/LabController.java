@@ -5,6 +5,7 @@ import org.appslapp.AppsLappServer.business.pojo.exercise.ExerciseService;
 import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
 import org.appslapp.AppsLappServer.business.pojo.lab.LabService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
+import org.appslapp.AppsLappServer.business.security.Labmaster.LabmasterDetailsImp;
 import org.appslapp.AppsLappServer.business.security.User.UserDetailsImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -44,8 +45,8 @@ public class LabController {
     }
 
     @GetMapping("getLabs")
-    public List<Lab> getLabs(@AuthenticationPrincipal UserDetailsImp user) {
-        return labService.findAllByLabmasterId(user.getId());
+    public Lab getLab(@AuthenticationPrincipal LabmasterDetailsImp user) {
+        return user.getLab();
     }
 
     @PostMapping("createExercise")
