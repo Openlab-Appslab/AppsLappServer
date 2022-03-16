@@ -1,6 +1,5 @@
 package org.appslapp.AppsLappServer.business.pojo.users.labmaster;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,9 +28,6 @@ public class Labmaster {
 
     @Pattern(regexp = "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")
     private String email;
-
-    @JsonIgnore
-    private String authority;
 
     @OneToOne
     @JoinColumn(referencedColumnName = "id")

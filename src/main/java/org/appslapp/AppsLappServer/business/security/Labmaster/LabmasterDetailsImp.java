@@ -21,7 +21,7 @@ public class LabmasterDetailsImp implements UserDetails {
     public LabmasterDetailsImp(Labmaster labmaster) {
         username = labmaster.getUsername();
         password = labmaster.getPassword();
-        rolesAndAuthorities = List.of(new SimpleGrantedAuthority(labmaster.getAuthority()));
+        rolesAndAuthorities = List.of(new SimpleGrantedAuthority("LABMASTER"));
         id = labmaster.getId();
         this.firstName = labmaster.getFirstName();
         this.lastName = labmaster.getLastName();

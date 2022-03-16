@@ -48,6 +48,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/management/createLab").hasAnyAuthority("ADMIN", "LABMASTER")
                 .mvcMatchers("/api/management/getLabs").hasAnyAuthority("LABMASTER")
                 .mvcMatchers("/api/management/createExercise").hasAnyAuthority("ADMIN", "LABMASTER")
+                .mvcMatchers("/api/auth/createAdmins").permitAll()
                 .anyRequest().denyAll()
                 .and()
                 .csrf().disable().cors().configurationSource(request -> config)

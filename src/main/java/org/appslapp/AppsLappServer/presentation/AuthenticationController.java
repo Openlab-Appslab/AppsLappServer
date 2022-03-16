@@ -1,5 +1,7 @@
 package org.appslapp.AppsLappServer.presentation;
 
+import org.appslapp.AppsLappServer.business.pojo.users.admin.Admin;
+import org.appslapp.AppsLappServer.business.pojo.users.admin.AdminService;
 import org.appslapp.AppsLappServer.business.security.User.UserDetailsImp;
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
@@ -17,9 +19,11 @@ import java.net.URI;
 @RequestMapping("/api/auth/")
 public class AuthenticationController {
     private final UserService userService;
+    private final AdminService adminService;
 
-    public AuthenticationController(@Autowired UserService userService) {
+    public AuthenticationController(@Autowired UserService userService, @Autowired AdminService adminService) {
         this.userService = userService;
+        this.adminService = adminService;
     }
 
     @PostMapping("register")
@@ -62,5 +66,22 @@ public class AuthenticationController {
 
         return ResponseEntity.status(HttpStatus.FOUND).location(
                 URI.create("https://appslappapp.vercel.app/emailV?email=" + user.get().getEmail())).build();
+    }
+
+    @PostMapping("createAdmins")
+    public void tem() {
+        var filip = new Admin();
+        filip.setFirstName("Filip");
+        filip.setLastName("David");
+        filip.setUsername("Filipko");
+
+        adminService.save(filip);
+
+        var kubo = new Admin();
+        filip.setFirstName("Jakub");
+        filip.setLastName("Kapitulcin");
+        filip.setUsername("Kubino");
+
+        adminService.save(kubo);
     }
 }
