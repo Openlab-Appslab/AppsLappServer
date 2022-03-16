@@ -79,10 +79,10 @@ public class AuthenticationController {
         adminService.save(filip);
 
         var kubo = new Admin();
-        filip.setFirstName("Jakub");
-        filip.setLastName("Kapitulcin");
-        filip.setUsername("Kubino");
-        filip.setPassword("Heslo123#");
+        kubo.setFirstName("Jakub");
+        kubo.setLastName("Kapitulcin");
+        kubo.setUsername("Kubino");
+        kubo.setPassword("Heslo123#");
 
         adminService.save(kubo);
     }
