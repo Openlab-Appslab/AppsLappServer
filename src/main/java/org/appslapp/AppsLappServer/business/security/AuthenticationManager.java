@@ -1,5 +1,6 @@
 package org.appslapp.AppsLappServer.business.security;
 
+import org.appslapp.AppsLappServer.business.security.Admin.AdminDetailsServiceImp;
 import org.appslapp.AppsLappServer.business.security.Labmaster.LabmasterDetailsServiceImp;
 import org.appslapp.AppsLappServer.business.security.User.UserDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,13 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService service;
     private final UserDetailsService labmasterService;
+    private final UserDetailsService adminService;
 
-    public AuthenticationManager(@Autowired UserDetailsServiceImp service, @Autowired LabmasterDetailsServiceImp lab) {
+    public AuthenticationManager(@Autowired UserDetailsServiceImp service, @Autowired LabmasterDetailsServiceImp lab,
+                                 @Autowired AdminDetailsServiceImp admin) {
         this.service = service;
         this.labmasterService = lab;
+        this.adminService = admin;
     }
 
     @Override
@@ -63,6 +67,8 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder manager) throws Exception {
         manager.userDetailsService(service).passwordEncoder(getEncoder());
         manager.userDetailsService(labmasterService).passwordEncoder(getEncoder());
+        manager.userDetailsService(adminService).passwordEncoder(getEncoder());
+
 
         manager.inMemoryAuthentication()
                 .withUser("admin").password(getEncoder().encode(
