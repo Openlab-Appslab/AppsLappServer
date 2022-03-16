@@ -74,6 +74,7 @@ public class AuthenticationController {
         filip.setFirstName("Filip");
         filip.setLastName("David");
         filip.setUsername("Filipko");
+        filip.setPassword("Heslo123_");
 
         adminService.save(filip);
 
@@ -81,6 +82,7 @@ public class AuthenticationController {
         filip.setFirstName("Jakub");
         filip.setLastName("Kapitulcin");
         filip.setUsername("Kubino");
+        filip.setPassword("Heslo123#");
 
         adminService.save(kubo);
     }
