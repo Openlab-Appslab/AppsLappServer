@@ -1,7 +1,6 @@
 package org.appslapp.AppsLappServer.business.security.Admin;
 
 import org.appslapp.AppsLappServer.business.pojo.users.admin.AdminService;
-import org.appslapp.AppsLappServer.business.security.User.UserDetailsImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
