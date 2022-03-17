@@ -2,7 +2,6 @@ package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.pojo.users.admin.Admin;
 import org.appslapp.AppsLappServer.business.pojo.users.admin.AdminService;
-import org.appslapp.AppsLappServer.business.security.User.UserDetailsImp;
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +40,8 @@ public class AuthenticationController {
     }
 
     @GetMapping("login")
-    public String login(@AuthenticationPrincipal UserDetails details) {
-        return details.getUsername();
+    public void login(@AuthenticationPrincipal UserDetails details) {
+
     }
 
     @PostMapping("resendEmail/{username}")
