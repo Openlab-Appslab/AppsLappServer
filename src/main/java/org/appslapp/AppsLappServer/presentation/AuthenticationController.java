@@ -75,13 +75,15 @@ public class AuthenticationController {
         filip.setFirstName("Filip");
         filip.setLastName("David");
         filip.setUsername("Filipko");
+        filip.setPassword("Heslo123_");
 
         adminService.save(filip);
 
         var kubo = new Admin();
-        filip.setFirstName("Jakub");
-        filip.setLastName("Kapitulcin");
-        filip.setUsername("Kubino");
+        kubo.setFirstName("Jakub");
+        kubo.setLastName("Kapitulcin");
+        kubo.setUsername("Kubino");
+        kubo.setPassword("Heslo123#");
 
         adminService.save(kubo);
     }
