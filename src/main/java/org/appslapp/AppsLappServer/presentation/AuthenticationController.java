@@ -40,8 +40,8 @@ public class AuthenticationController {
     }
 
     @GetMapping("login")
-    public void login(@AuthenticationPrincipal UserDetails details) {
-
+    public long login(@AuthenticationPrincipal UserDetails details) {
+        return 0;
     }
 
     @PostMapping("resendEmail/{username}")
