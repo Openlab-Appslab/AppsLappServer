@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -40,8 +41,8 @@ public class AuthenticationController {
     }
 
     @GetMapping("login")
-    public long login(@AuthenticationPrincipal UserDetailsImp details) {
-        return details.getId();
+    public String login(@AuthenticationPrincipal UserDetails details) {
+        return details.getUsername();
     }
 
     @PostMapping("resendEmail/{username}")
