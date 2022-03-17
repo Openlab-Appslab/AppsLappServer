@@ -2,6 +2,7 @@ package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.pojo.users.admin.Admin;
 import org.appslapp.AppsLappServer.business.pojo.users.admin.AdminService;
+import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,13 @@ import java.net.URI;
 public class AuthenticationController {
     private final UserService userService;
     private final AdminService adminService;
+    private final LabmasterService labmasterService;
 
-    public AuthenticationController(@Autowired UserService userService, @Autowired AdminService adminService) {
+    public AuthenticationController(@Autowired UserService userService, @Autowired AdminService adminService,
+                                    @Autowired LabmasterService labmasterService) {
         this.userService = userService;
         this.adminService = adminService;
+        this.labmasterService = labmasterService;
     }
 
     @PostMapping("register")
@@ -66,6 +70,17 @@ public class AuthenticationController {
 
         return ResponseEntity.status(HttpStatus.FOUND).location(
                 URI.create("https://appslappapp.vercel.app/emailV?email=" + user.get().getEmail())).build();
+    }
+
+    @PostMapping("promoteToLabmaster")
+    public long promoteToLabmaster(@RequestParam String username) {
+        var user = userService.getUserByName(username);
+
+        if (user.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, username);
+
+        var labmaster = userService.createLabmaster(user.get());
+        return labmasterService.save(labmaster);
     }
 
     @PostMapping("createAdmins")
