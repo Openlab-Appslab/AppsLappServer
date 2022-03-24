@@ -28,6 +28,7 @@ public class AuthenticationController {
         this.userService = userService;
         this.adminService = adminService;
         this.labmasterService = labmasterService;
+        System.out.println(labmasterService.getByUsername("skapMaster"));
     }
 
     @PostMapping("register")
@@ -73,13 +74,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("promoteToLabmaster")
-    public long promoteToLabmaster(@RequestParam String username) {
+    public long promoteToLabmaster(@RequestParam String username, @RequestParam String password) {
         var user = userService.getUserByName(username);
 
         if (user.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, username);
 
-        var labmaster = userService.createLabmaster(user.get());
+        var labmaster = userService.createLabmaster(user.get(), password);
         return labmasterService.save(labmaster);
     }
 

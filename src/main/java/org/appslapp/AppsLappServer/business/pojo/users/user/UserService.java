@@ -20,7 +20,8 @@ public class UserService {
     private final PasswordEncoder encoder;
     private final JavaMailSender mailSender;
 
-    public UserService(@Autowired UserRepository repository, @Autowired PasswordEncoder encoder, @Autowired JavaMailSender sender) {
+    public UserService(@Autowired UserRepository repository, @Autowired PasswordEncoder encoder,
+                       @Autowired JavaMailSender sender) {
         this.userRepository = repository;
         this.encoder = encoder;
         this.mailSender = sender;
@@ -136,13 +137,13 @@ public class UserService {
         mailSender.send(message);
     }
 
-    public Labmaster createLabmaster(User user) {
+    public Labmaster createLabmaster(User user, String password) {
         var labmaster = new Labmaster();
         labmaster.setUsername(user.getUsername());
         labmaster.setFirstName(user.getFirstName());
         labmaster.setLastName(user.getLastName());
         labmaster.setEmail(user.getEmail());
-        labmaster.setPassword(user.getPassword());
+        labmaster.setPassword(encoder.encode(password));
         userRepository.delete(user);
         return labmaster;
     }
