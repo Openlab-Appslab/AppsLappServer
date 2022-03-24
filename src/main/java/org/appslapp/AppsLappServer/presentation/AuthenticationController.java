@@ -2,6 +2,7 @@ package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.pojo.users.admin.Admin;
 import org.appslapp.AppsLappServer.business.pojo.users.admin.AdminService;
+import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
@@ -86,20 +87,9 @@ public class AuthenticationController {
 
     @PostMapping("createAdmins")
     public void tem() {
-        var filip = new Admin();
-        filip.setFirstName("Filip");
-        filip.setLastName("David");
-        filip.setUsername("Filipko");
-        filip.setPassword("Heslo123_");
-
-        adminService.save(filip);
-
-        var kubo = new Admin();
-        kubo.setFirstName("Jakub");
-        kubo.setLastName("Kapitulcin");
-        kubo.setUsername("Kubino");
-        kubo.setPassword("Heslo123#");
-
-        adminService.save(kubo);
+        var labmaster =  new Labmaster();
+        labmaster.setUsername("ratatui");
+        labmaster.setPassword("Heslo123_");
+        labmasterService.save(labmaster);
     }
 }
