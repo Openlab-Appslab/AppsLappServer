@@ -4,6 +4,7 @@ import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
 import org.appslapp.AppsLappServer.business.pojo.exercise.ExerciseService;
 import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
 import org.appslapp.AppsLappServer.business.pojo.lab.LabService;
+import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.appslapp.AppsLappServer.business.security.Labmaster.LabmasterDetailsImp;
 import org.appslapp.AppsLappServer.business.security.User.UserDetailsImp;
@@ -22,12 +23,14 @@ public class LabController {
     private final UserService userService;
     private final LabService labService;
     private final ExerciseService exerciseService;
+    private final LabmasterService labmasterService;
 
     public LabController(@Autowired UserService userService, @Autowired LabService labService,
-                         @Autowired ExerciseService exerciseService) {
+                         @Autowired ExerciseService exerciseService, @Autowired LabmasterService labmasterService) {
         this.userService = userService;
         this.labService = labService;
         this.exerciseService = exerciseService;
+        this.labmasterService = labmasterService;
     }
 
     @GetMapping("getStudents")
@@ -36,12 +39,16 @@ public class LabController {
     }
 
     @PostMapping("createLab")
-    public long createLab(@RequestBody Map<String, String> test, @AuthenticationPrincipal UserDetailsImp user) {
+    public long createLab(@RequestBody Map<String, String> test, @AuthenticationPrincipal LabmasterDetailsImp user) {
         Lab lab = new Lab();
         lab.setName(test.get("name"));
         lab.setStudentNames(List.of(test.get(("studentNames")).split(",,,")));
-        System.out.println(lab.getStudentNames());
-        return labService.save(lab);
+        var labmaster = labmasterService.getByUsername(user.getUsername()).get();
+        lab.setLabmaster(labmaster);
+        labmaster.setLab(lab);
+        var id = labService.save(lab);
+        labmasterService.save(labmaster);
+        return id;
     }
 
     @GetMapping("getLabs")
