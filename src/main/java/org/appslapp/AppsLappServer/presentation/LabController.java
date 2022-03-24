@@ -62,7 +62,9 @@ public class LabController {
     }
 
     @GetMapping("getAllExercises")
-    public List<Exercise> getAllExercises() {
-        return exerciseService.getAllExercises();
+    public Object getAllExercises() {
+        return new Object() {
+            public List<Exercise> exercises = exerciseService.getAllExercises();
+        };
     }
 }
