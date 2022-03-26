@@ -15,11 +15,6 @@ import javax.persistence.Id;
 @Setter
 @NoArgsConstructor
 public class User extends org.appslapp.AppsLappServer.business.pojo.users.entity.Entity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @JsonIgnore
     private String verificationCode;
 }

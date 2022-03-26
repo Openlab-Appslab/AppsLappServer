@@ -7,13 +7,22 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Pattern;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@MappedSuperclass
 public class Entity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Pattern(regexp = "[a-zA-Z0-9._]{4,10}", message = "Name contains illegal characters or is too long.")
     private String username;

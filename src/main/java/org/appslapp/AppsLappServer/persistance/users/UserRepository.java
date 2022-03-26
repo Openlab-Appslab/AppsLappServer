@@ -1,6 +1,7 @@
 package org.appslapp.AppsLappServer.persistance.users;
 
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
