@@ -1,6 +1,7 @@
 package org.appslapp.AppsLappServer.business.pojo.users.user;
 
 import net.bytebuddy.utility.RandomString;
+import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.persistance.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,7 +20,8 @@ public class UserService {
     private final PasswordEncoder encoder;
     private final JavaMailSender mailSender;
 
-    public UserService(@Autowired UserRepository repository, @Autowired PasswordEncoder encoder, @Autowired JavaMailSender sender) {
+    public UserService(@Autowired UserRepository repository, @Autowired PasswordEncoder encoder,
+                       @Autowired JavaMailSender sender) {
         this.userRepository = repository;
         this.encoder = encoder;
         this.mailSender = sender;
@@ -133,5 +135,16 @@ public class UserService {
         helper.setText(content, true);
 
         mailSender.send(message);
+    }
+
+    public Labmaster createLabmaster(User user, String password) {
+        var labmaster = new Labmaster();
+        labmaster.setUsername(user.getUsername());
+        labmaster.setFirstName(user.getFirstName());
+        labmaster.setLastName(user.getLastName());
+        labmaster.setEmail(user.getEmail());
+        labmaster.setPassword(encoder.encode(password));
+        userRepository.delete(user);
+        return labmaster;
     }
 }
