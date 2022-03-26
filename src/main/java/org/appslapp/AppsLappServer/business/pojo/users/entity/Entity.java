@@ -24,7 +24,7 @@ public class Entity {
 
     private String password;
 
-    private String authority;
+    private String role;
 
     @Pattern(regexp = "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")
     private String email;
@@ -32,6 +32,6 @@ public class Entity {
     private boolean enabled;
 
     public GrantedAuthority getGrantedAuthority() {
-        return new SimpleGrantedAuthority(authority);
+        return new SimpleGrantedAuthority(role);
     }
 }

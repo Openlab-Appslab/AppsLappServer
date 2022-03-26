@@ -57,8 +57,8 @@ public class UserService implements EntityService<User> {
         if (!isPasswordValid(user.getPassword()))
             return -1;
 
-        if (user.getAuthority() == null)
-            user.setAuthority("PUPIL");
+        if (user.getRole() == null)
+            user.setRole("PUPIL");
 
         user.setPassword(encoder.encode(user.getPassword()));
 
