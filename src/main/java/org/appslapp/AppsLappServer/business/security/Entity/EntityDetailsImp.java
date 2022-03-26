@@ -16,7 +16,7 @@ public class EntityDetailsImp<T extends Entity> implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(user.getGrantedAuthority());
+        return List.of(user.createGrantedAuthority());
     }
 
     @Override

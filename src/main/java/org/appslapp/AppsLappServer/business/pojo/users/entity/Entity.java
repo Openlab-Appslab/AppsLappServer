@@ -24,14 +24,14 @@ public class Entity {
 
     private String password;
 
-    private String role;
+    private String authority;
 
     @Pattern(regexp = "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$")
     private String email;
 
     private boolean enabled;
 
-    public GrantedAuthority getGrantedAuthority() {
-        return new SimpleGrantedAuthority(role);
+    public GrantedAuthority createGrantedAuthority() {
+        return new SimpleGrantedAuthority(authority);
     }
 }
