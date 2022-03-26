@@ -45,9 +45,10 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/auth/login").authenticated()
                 .mvcMatchers("/api/user/get").authenticated()
                 .mvcMatchers("/api/management/getStudents").hasAnyAuthority("ADMIN", "LABMASTER")
-                .mvcMatchers("/api/management/createLab").hasAnyAuthority("ADMIN", "LABMASTER")
-                .mvcMatchers("/api/management/getLabs").hasAnyAuthority("LABMASTER")
+                .mvcMatchers("/api/management/createLab").hasAnyAuthority("LABMASTER")
+                .mvcMatchers("/api/management/getLabs").hasAnyAuthority("ADMIN", "LABMASTER")
                 .mvcMatchers("/api/management/createExercise").hasAnyAuthority("ADMIN", "LABMASTER")
+                .mvcMatchers("/api/management/createGroupOfExercises").hasAnyAuthority("LABMASTER")
                 .mvcMatchers("/api/auth/createAdmins").permitAll()
                 .anyRequest().denyAll()
                 .and()
@@ -69,6 +70,5 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
         manager.userDetailsService(adminService).passwordEncoder(getEncoder());
         manager.userDetailsService(service).passwordEncoder(getEncoder());
         manager.userDetailsService(labmasterService).passwordEncoder(getEncoder());
-
     }
 }

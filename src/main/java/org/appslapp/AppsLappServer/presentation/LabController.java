@@ -2,6 +2,8 @@ package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
 import org.appslapp.AppsLappServer.business.pojo.exercise.ExerciseService;
+import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
+import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercisesService;
 import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
 import org.appslapp.AppsLappServer.business.pojo.lab.LabService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
@@ -9,7 +11,11 @@ import org.appslapp.AppsLappServer.business.security.Labmaster.LabmasterDetailsI
 import org.appslapp.AppsLappServer.business.security.User.UserDetailsImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,12 +28,15 @@ public class LabController {
     private final UserService userService;
     private final LabService labService;
     private final ExerciseService exerciseService;
+    private final GroupOfExercisesService groupOfExercisesService;
 
     public LabController(@Autowired UserService userService, @Autowired LabService labService,
-                         @Autowired ExerciseService exerciseService) {
+                         @Autowired ExerciseService exerciseService,
+                         @Autowired GroupOfExercisesService groupOfExercisesService) {
         this.userService = userService;
         this.labService = labService;
         this.exerciseService = exerciseService;
+        this.groupOfExercisesService = groupOfExercisesService;
     }
 
     @GetMapping("getStudents")
@@ -44,7 +53,7 @@ public class LabController {
         return labService.save(lab);
     }
 
-    @GetMapping("getLabs")
+    @GetMapping("getLab")
     public Lab getLab(@AuthenticationPrincipal LabmasterDetailsImp user) {
         return user.getLab();
     }
@@ -57,5 +66,10 @@ public class LabController {
     @GetMapping("getAllExercises")
     public List<Exercise> getAllExercises() {
         return exerciseService.getAllExercises();
+    }
+
+    @PostMapping("createGroupOfExercises")
+    public Long createGroupOfExercises(@Valid @RequestBody GroupOfExercises groupOfExercises) {
+        return groupOfExercisesService.save(groupOfExercises);
     }
 }
