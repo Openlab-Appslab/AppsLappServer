@@ -1,4 +1,4 @@
-package org.appslapp.AppsLappServer.business.security.entity;
+package org.appslapp.AppsLappServer.business.security.Entity;
 
 import org.appslapp.AppsLappServer.business.pojo.users.entity.Entity;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,10 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-public class EntityDetails<T extends Entity> implements UserDetails {
+public class EntityDetailsImp<T extends Entity> implements UserDetails {
     protected  T user;
 
-    protected EntityDetails(T user) {
+    protected EntityDetailsImp(T user) {
         this.user = user;
     }
 
@@ -47,10 +47,6 @@ public class EntityDetails<T extends Entity> implements UserDetails {
     @Override
     public boolean isEnabled() {
         return user.isEnabled();
-    }
-
-    public long getId() {
-        return user.getId();
     }
 
     public String getEmail() {

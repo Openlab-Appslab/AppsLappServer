@@ -1,6 +1,7 @@
 package org.appslapp.AppsLappServer.business.pojo.users.user;
 
 import net.bytebuddy.utility.RandomString;
+import org.appslapp.AppsLappServer.business.pojo.users.entity.EntityService;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.persistance.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 @Service
-public class UserService {
+public class UserService implements EntityService<User> {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
     private final JavaMailSender mailSender;
@@ -80,6 +81,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    @Override
     public Optional<User> getUserByName(String username) {
         return userRepository.findByUsername(username);
     }
