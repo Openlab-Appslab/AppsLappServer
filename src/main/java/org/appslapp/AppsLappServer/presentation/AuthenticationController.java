@@ -29,7 +29,6 @@ public class AuthenticationController {
         this.userService = userService;
         this.adminService = adminService;
         this.labmasterService = labmasterService;
-        System.out.println(labmasterService.getUserByName("skapMaster"));
     }
 
     @PostMapping("register")
