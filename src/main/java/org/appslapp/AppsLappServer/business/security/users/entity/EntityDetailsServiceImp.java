@@ -1,4 +1,4 @@
-package org.appslapp.AppsLappServer.business.security.Entity;
+package org.appslapp.AppsLappServer.business.security.users.entity;
 
 import org.appslapp.AppsLappServer.business.pojo.users.entity.Entity;
 import org.appslapp.AppsLappServer.business.pojo.users.entity.EntityService;

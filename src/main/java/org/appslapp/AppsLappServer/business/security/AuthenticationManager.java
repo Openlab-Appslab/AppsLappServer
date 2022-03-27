@@ -1,8 +1,8 @@
 package org.appslapp.AppsLappServer.business.security;
 
-import org.appslapp.AppsLappServer.business.security.Admin.AdminDetailsServiceImp;
-import org.appslapp.AppsLappServer.business.security.Labmaster.LabmasterDetailsServiceImp;
-import org.appslapp.AppsLappServer.business.security.User.UserDetailsServiceImp;
+import org.appslapp.AppsLappServer.business.security.users.admin.AdminDetailsServiceImp;
+import org.appslapp.AppsLappServer.business.security.users.labmaster.LabmasterDetailsServiceImp;
+import org.appslapp.AppsLappServer.business.security.users.user.UserDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

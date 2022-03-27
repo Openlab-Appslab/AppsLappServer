@@ -1,7 +1,9 @@
 package org.appslapp.AppsLappServer.presentation;
 
-import org.appslapp.AppsLappServer.business.security.User.UserDetailsImp;
+import org.appslapp.AppsLappServer.business.pojo.users.entity.Entity;
+import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
+import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,18 +15,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/user/")
 public class UserController {
-
-    private final UserService userService;
-
-    public UserController(@Autowired UserService userService) {
-        this.userService = userService;
-    }
-
     @GetMapping("get")
-    public Map<String, String> getRegisteredUser(@AuthenticationPrincipal UserDetailsImp principal) {
+    public Map<String, String> getRegisteredUser(@AuthenticationPrincipal EntityDetailsImp<? extends Entity> principal) {
         return Map.of("firstName", principal.getFirstName(),
                 "lastName", principal.getLastName());
     }
-
-
 }

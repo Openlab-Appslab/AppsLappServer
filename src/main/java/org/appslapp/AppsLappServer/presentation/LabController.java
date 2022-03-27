@@ -8,8 +8,7 @@ import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
 import org.appslapp.AppsLappServer.business.pojo.lab.LabService;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
-import org.appslapp.AppsLappServer.business.security.Labmaster.LabmasterDetailsImp;
-import org.appslapp.AppsLappServer.business.security.User.UserDetailsImp;
+import org.appslapp.AppsLappServer.business.security.users.labmaster.LabmasterDetailsImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +51,7 @@ public class LabController {
         Lab lab = new Lab();
         lab.setName(test.get("name"));
         lab.setStudentNames(List.of(test.get(("studentNames")).split(",,,")));
-        var labmaster = labmasterService.getByUsername(user.getUsername()).get();
+        var labmaster = labmasterService.getUserByName(user.getUsername()).get();
         lab.setLabmaster(labmaster);
         labmaster.setLab(lab);
         var id = labService.save(lab);

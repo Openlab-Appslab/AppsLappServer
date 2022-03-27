@@ -1,8 +1,9 @@
-package org.appslapp.AppsLappServer.business.security.User;
+package org.appslapp.AppsLappServer.business.security.users.user;
 
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
-import org.appslapp.AppsLappServer.business.security.Entity.EntityDetailsServiceImp;
+import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;
+import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +18,6 @@ public class UserDetailsServiceImp extends EntityDetailsServiceImp<User, UserSer
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new UserDetailsImp(getUserByUsername(username));
+        return new EntityDetailsImp<>(getUserByUsername(username));
     }
 }

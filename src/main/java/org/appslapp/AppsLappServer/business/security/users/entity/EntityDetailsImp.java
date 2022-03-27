@@ -1,4 +1,4 @@
-package org.appslapp.AppsLappServer.business.security.Entity;
+package org.appslapp.AppsLappServer.business.security.users.entity;
 
 import org.appslapp.AppsLappServer.business.pojo.users.entity.Entity;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,8 +10,12 @@ import java.util.List;
 public class EntityDetailsImp<T extends Entity> implements UserDetails {
     protected  T user;
 
-    protected EntityDetailsImp(T user) {
+    public EntityDetailsImp(T user) {
         this.user = user;
+    }
+
+    public long getId() {
+        return user.getId();
     }
 
     @Override

@@ -1,6 +1,8 @@
-package org.appslapp.AppsLappServer.business.security.Labmaster;
+package org.appslapp.AppsLappServer.business.security.users.labmaster;
 
+import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
+import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,21 +10,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LabmasterDetailsServiceImp implements UserDetailsService {
-    private final LabmasterService service;
-
+public class LabmasterDetailsServiceImp extends EntityDetailsServiceImp<Labmaster, LabmasterService>
+        implements UserDetailsService {
     public LabmasterDetailsServiceImp(@Autowired LabmasterService service) {
-        this.service = service;
+        super(service);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = service.getByUsername(username);
-
-        if (user.isEmpty()) {
-            throw new UsernameNotFoundException("Not found: " + username);
-        }
-
-        return new LabmasterDetailsImp(user.get());
+        return new LabmasterDetailsImp(getUserByUsername(username));
     }
 }

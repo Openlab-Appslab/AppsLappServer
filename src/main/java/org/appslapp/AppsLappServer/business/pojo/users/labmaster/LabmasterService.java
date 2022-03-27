@@ -1,5 +1,6 @@
 package org.appslapp.AppsLappServer.business.pojo.users.labmaster;
 
+import org.appslapp.AppsLappServer.business.pojo.users.entity.EntityService;
 import org.appslapp.AppsLappServer.persistance.users.LabmasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class LabmasterService {
+public class LabmasterService implements EntityService<Labmaster> {
     private final LabmasterRepository labmasterRepository;
     private final PasswordEncoder encoder;
 
@@ -17,8 +18,9 @@ public class LabmasterService {
         this.encoder = encoder;
     }
 
-    public Optional<Labmaster> getByUsername(String username) {
-        return labmasterRepository.findByUsername(username);
+    @Override
+    public Optional<Labmaster> getUserByName(String name) {
+        return labmasterRepository.findByUsername(name);
     }
 
     public long save(Labmaster master) {
