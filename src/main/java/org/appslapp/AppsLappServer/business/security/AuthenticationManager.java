@@ -1,5 +1,6 @@
 package org.appslapp.AppsLappServer.business.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.appslapp.AppsLappServer.business.security.users.admin.AdminDetailsServiceImp;
 import org.appslapp.AppsLappServer.business.security.users.labmaster.LabmasterDetailsServiceImp;
 import org.appslapp.AppsLappServer.business.security.users.user.UserDetailsServiceImp;
@@ -18,9 +19,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import java.util.List;
 
 @EnableWebSecurity
+@Slf4j
 public class AuthenticationManager extends WebSecurityConfigurerAdapter {
-    Logger logger = LoggerFactory.getLogger(AuthenticationManager.class);
-
     private final UserDetailsService service;
     private final UserDetailsService labmasterService;
     private final UserDetailsService adminService;
@@ -74,7 +74,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder manager) throws Exception {
-        logger.debug(adminService.loadUserByUsername("admin").getUsername());
+        log.debug(adminService.loadUserByUsername("admin").getUsername());
         manager.userDetailsService(adminService).passwordEncoder(getEncoder());
         manager.userDetailsService(service).passwordEncoder(getEncoder());
         manager.userDetailsService(labmasterService).passwordEncoder(getEncoder());
