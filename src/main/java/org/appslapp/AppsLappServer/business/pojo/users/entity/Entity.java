@@ -43,7 +43,6 @@ public class Entity {
     @JsonIgnore
     private boolean enabled;
 
-    @JsonIgnore
     public GrantedAuthority createGrantedAuthority() {
         return new SimpleGrantedAuthority(authority);
     }
