@@ -71,6 +71,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder manager) throws Exception {
+        System.out.println(adminService.loadUserByUsername("admin"));
         manager.userDetailsService(adminService).passwordEncoder(getEncoder());
         manager.userDetailsService(service).passwordEncoder(getEncoder());
         manager.userDetailsService(labmasterService).passwordEncoder(getEncoder());

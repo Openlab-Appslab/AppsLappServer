@@ -104,7 +104,7 @@ public class AuthenticationController {
         user.setLastName("jozko");
         user.setEnabled(true);
         user.setEmail("emailovaadresa@gmail.com");
-        user.setAuthority("USER");
+        user.setAuthority("PUPIL");
         userService.save(user);
 
         var labmaster =  new Labmaster();
