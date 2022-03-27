@@ -3,6 +3,8 @@ package org.appslapp.AppsLappServer.business.security;
 import org.appslapp.AppsLappServer.business.security.users.admin.AdminDetailsServiceImp;
 import org.appslapp.AppsLappServer.business.security.users.labmaster.LabmasterDetailsServiceImp;
 import org.appslapp.AppsLappServer.business.security.users.user.UserDetailsServiceImp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @EnableWebSecurity
 public class AuthenticationManager extends WebSecurityConfigurerAdapter {
+    Logger logger = LoggerFactory.getLogger(AuthenticationManager.class);
 
     private final UserDetailsService service;
     private final UserDetailsService labmasterService;
@@ -71,7 +74,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder manager) throws Exception {
-        System.out.println(adminService.loadUserByUsername("admin"));
+        logger.debug(adminService.loadUserByUsername("admin").getUsername());
         manager.userDetailsService(adminService).passwordEncoder(getEncoder());
         manager.userDetailsService(service).passwordEncoder(getEncoder());
         manager.userDetailsService(labmasterService).passwordEncoder(getEncoder());
