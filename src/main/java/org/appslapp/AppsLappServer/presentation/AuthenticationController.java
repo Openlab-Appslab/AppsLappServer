@@ -32,16 +32,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("register")
-    public ResponseEntity<Long> register(@Valid @RequestBody User user) {
-        var id = userService.save(user);
-
-        if (id == -1)
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong password");
-
-        if (id == -2)
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already exists.");
-
-        return new ResponseEntity<>(id, HttpStatus.OK);
+    public long register(@Valid @RequestBody User user) {
+        return userService.save(user);
     }
 
     @GetMapping("login")
@@ -50,40 +42,22 @@ public class AuthenticationController {
     }
 
     @PostMapping("resendEmail/{username}")
-    public long resend(@PathVariable String username) {
-        var id = userService.resendEmail(username);
-
-        if (id == -1)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, username);
-
-        return id;
+    public long resendEmail(@PathVariable String username) {
+        return userService.resendEmail(username);
     }
 
     @GetMapping("verify")
     public ResponseEntity<Void> verifyEmail(@RequestParam String code) {
-        var user = userService.findByCode(code);
-
-        if (user.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User doesn't exist");
-        var u = user.get();
-        u.setEnabled(true);
-        userService.update(u);
-
-        return ResponseEntity.status(HttpStatus.FOUND).location(
-                URI.create("https://appslappapp.vercel.app/emailV?email=" + user.get().getEmail())).build();
+        return ResponseEntity.status(HttpStatus.OK).location(
+                URI.create("https://appslappapp.vercel.app/emailV?email=" + userService.verifyUser(code))).build();
     }
 
     @PostMapping("promoteToLabmaster")
     public long promoteToLabmaster(@RequestParam String username, @RequestParam String password) {
-        var user = userService.getUserByName(username);
-
-        if (user.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, username);
-
-        var labmaster = userService.createLabmaster(user.get(), password);
-        return labmasterService.save(labmaster);
+        return labmasterService.save(userService.createLabmaster(username, password));
     }
 
+    //Only for test purposes
     @PostMapping("createAdmins")
     public void tem() {
         var admin = new Admin();

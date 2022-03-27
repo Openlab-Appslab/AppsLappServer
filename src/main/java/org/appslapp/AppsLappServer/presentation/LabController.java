@@ -51,7 +51,7 @@ public class LabController {
         Lab lab = new Lab();
         lab.setName(test.get("name"));
         lab.setStudentNames(List.of(test.get(("studentNames")).split(",,,")));
-        var labmaster = labmasterService.getUserByName(user.getUsername()).get();
+        var labmaster = labmasterService.getUserByName(user.getUsername());
         lab.setLabmaster(labmaster);
         labmaster.setLab(lab);
         var id = labService.save(lab);

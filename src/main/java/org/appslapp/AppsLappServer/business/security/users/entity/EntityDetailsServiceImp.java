@@ -12,12 +12,6 @@ public class EntityDetailsServiceImp<K extends Entity, T extends EntityService<K
     }
 
     public K getUserByUsername(String username) throws UsernameNotFoundException {
-        var user = entityService.getUserByName(username);
-
-        if (user.isEmpty()) {
-            throw new UsernameNotFoundException("Not found: " + username);
-        }
-
-        return user.get();
+        return entityService.getUserByName(username);
     }
 }

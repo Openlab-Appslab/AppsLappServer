@@ -3,6 +3,9 @@ package org.appslapp.AppsLappServer.business.pojo.users.user;
 import net.bytebuddy.utility.RandomString;
 import org.appslapp.AppsLappServer.business.pojo.users.entity.EntityService;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
+import org.appslapp.AppsLappServer.exceptions.UnsatisfyingPasswordException;
+import org.appslapp.AppsLappServer.exceptions.UserDoesntExistException;
+import org.appslapp.AppsLappServer.exceptions.UsernameAlreadyExistsException;
 import org.appslapp.AppsLappServer.persistance.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -46,17 +49,21 @@ public class UserService implements EntityService<User> {
         return userRepository.save(user).getId();
     }
 
-    public Optional<User> findByCode(String code) {
-        return userRepository.findByVerificationCode(code);
+    public String verifyUser(String code) {
+        var user = userRepository.findByVerificationCode(code)
+                .orElseThrow(() -> new UserDoesntExistException(code));
+        user.setEnabled(true);
+        save(user);
+        return user.getEmail();
     }
 
     public long save(User user) {
         if (userRepository.findByUsername(user.getUsername()).isPresent() ||
                 userRepository.findByEmail(user.getEmail()).isPresent())
-            return -2;
+            throw new UsernameAlreadyExistsException("Username: " + user.getUsername() + "exists");
 
         if (!isPasswordValid(user.getPassword()))
-            return -1;
+            throw new UnsatisfyingPasswordException("Password doesn't meet requirements");
 
         if (user.getAuthority() == null)
             user.setAuthority("PUPIL");
@@ -83,21 +90,20 @@ public class UserService implements EntityService<User> {
     }
 
     @Override
-    public Optional<User> getUserByName(String username) {
-        return userRepository.findByUsername(username);
+    public User getUserByName(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UserDoesntExistException(username));
     }
 
     public long resendEmail(String username) {
         var user = getUserByName(username);
-        if (user.isEmpty())
-            return -1;
+
         try {
-            sendVerificationEmail(user.get());
+            sendVerificationEmail(user);
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-        return user.get().getId();
+        return user.getId();
     }
 
     private boolean isPasswordValid(String password) {
@@ -140,7 +146,8 @@ public class UserService implements EntityService<User> {
         mailSender.send(message);
     }
 
-    public Labmaster createLabmaster(User user, String password) {
+    public Labmaster createLabmaster(String username, String password) {
+        var user = getUserByName(username);
         var labmaster = new Labmaster();
         labmaster.setUsername(user.getUsername());
         labmaster.setFirstName(user.getFirstName());
