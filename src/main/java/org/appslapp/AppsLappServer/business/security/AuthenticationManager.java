@@ -19,7 +19,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import java.util.List;
 
 @EnableWebSecurity
-@Slf4j
 public class AuthenticationManager extends WebSecurityConfigurerAdapter {
     private final UserDetailsService service;
     private final UserDetailsService labmasterService;
@@ -74,7 +73,6 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder manager) throws Exception {
-        log.debug(adminService.loadUserByUsername("admin").getUsername());
         manager.userDetailsService(adminService).passwordEncoder(getEncoder());
         manager.userDetailsService(service).passwordEncoder(getEncoder());
         manager.userDetailsService(labmasterService).passwordEncoder(getEncoder());

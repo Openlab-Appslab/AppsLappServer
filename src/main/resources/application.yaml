@@ -11,6 +11,9 @@ spring:
     password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
+  mvc:
+    log-request-details: true
+
   #Debug local only
   #datasource:
   #  url: jdbc:mysql://localhost:3306/appslapp
@@ -36,3 +39,9 @@ spring:
 debug: true
 server:
   port: ${PORT:8080}
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
