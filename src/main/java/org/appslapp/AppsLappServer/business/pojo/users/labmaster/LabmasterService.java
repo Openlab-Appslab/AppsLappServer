@@ -26,4 +26,8 @@ public class LabmasterService implements EntityService<Labmaster> {
         master.setPassword(encoder.encode(master.getPassword()));
         return labmasterRepository.save(master).getId();
     }
+
+    public long update(Labmaster master) {
+        return labmasterRepository.save(master).getId();
+    }
 }

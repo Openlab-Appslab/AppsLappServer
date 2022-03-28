@@ -50,14 +50,14 @@ public class LabController {
     }
 
     @PostMapping("createLab")
-    public long createLab(@RequestBody Map<String, String> rawLab,
+    public long createLab(@RequestBody Lab lab,
                           @AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
-        return labService.createLab(rawLab, labmasterService, user.getUsername());
+        return labService.createLab(lab, labmasterService, user.getUsername());
     }
 
     @GetMapping("getLab")
-    public Lab getLab(@AuthenticationPrincipal LabmasterDetailsImp user) {
-        return user.getLab();
+    public Lab getLab(@AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
+        return user.getUser().getLab();
     }
 
     @PostMapping("createExercise")

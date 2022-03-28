@@ -4,6 +4,7 @@ import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterServic
 import org.appslapp.AppsLappServer.persistance.LabRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Map;
@@ -20,15 +21,12 @@ public class LabService {
         return labRepository.save(lab).getId();
     }
 
-    public long createLab(Map<String, String> rawLab, LabmasterService labmasterService, String username) {
-        Lab lab = new Lab();
-        lab.setName(rawLab.get("name"));
-        lab.setStudentNames(List.of(rawLab.get(("studentNames")).split(",,,")));
+    public long createLab(Lab lab, LabmasterService labmasterService, String username) {
         var labmaster = labmasterService.getUserByName(username);
         lab.setLabmaster(labmaster);
         var id = save(lab);
         labmaster.setLab(lab);
-        labmasterService.save(labmaster);
+        labmasterService.update(labmaster);
         return id;
     }
 }
