@@ -4,11 +4,12 @@ spring:
       - rate-limit-buckets
     caffeine:
       spec: maximumSize=100000,expireAfterAccess=120s
+
   #Release
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: jdbc:postgresql://ec2-54-216-90-155.eu-west-1.compute.amazonaws.com/dbpo6jt9dd7hja
+    username: lkksxiirbgqdbj
+    password: i won't tell :)
     driver-class-name: org.postgresql.Driver
 
   mvc:

@@ -1,11 +1,10 @@
 package org.appslapp.AppsLappServer.business.security;
 
-import lombok.extern.slf4j.Slf4j;
-import org.appslapp.AppsLappServer.business.security.users.admin.AdminDetailsServiceImp;
-import org.appslapp.AppsLappServer.business.security.users.labmaster.LabmasterDetailsServiceImp;
-import org.appslapp.AppsLappServer.business.security.users.user.UserDetailsServiceImp;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.appslapp.AppsLappServer.business.pojo.users.admin.AdminService;
+import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
+import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
+import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
+import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,12 +19,12 @@ import java.util.List;
 
 @EnableWebSecurity
 public class AuthenticationManager extends WebSecurityConfigurerAdapter {
-    private final UserDetailsService service;
-    private final UserDetailsService labmasterService;
-    private final UserDetailsService adminService;
+    private final UserService service;
+    private final LabmasterService labmasterService;
+    private final AdminService adminService;
 
-    public AuthenticationManager(@Autowired UserDetailsServiceImp service, @Autowired LabmasterDetailsServiceImp lab,
-                                 @Autowired AdminDetailsServiceImp admin) {
+    public AuthenticationManager(@Autowired UserService service, @Autowired LabmasterService lab,
+                                 @Autowired AdminService admin) {
         this.service = service;
         this.labmasterService = lab;
         this.adminService = admin;
@@ -44,7 +43,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .mvcMatchers("/api/auth/register").permitAll()
                 .mvcMatchers("/api/auth/verify*").permitAll()
-                .mvcMatchers("/api/auth/login").authenticated()
+                .mvcMatchers("/api/auth/login").hasAnyAuthority("PUPIL", "ADMIN", "LABMASTER")
                 .mvcMatchers("/api/user/get").authenticated()
                 .mvcMatchers("/api/management/getStudents").hasAnyAuthority("ADMIN", "LABMASTER")
                 .mvcMatchers("/api/management/createLab").hasAnyAuthority("LABMASTER")
@@ -73,8 +72,9 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder manager) throws Exception {
-        manager.userDetailsService(labmasterService).passwordEncoder(getEncoder());
-        manager.userDetailsService(service).passwordEncoder(getEncoder());
-        manager.userDetailsService(adminService).passwordEncoder(getEncoder());
+        manager.userDetailsService(new EntityDetailsServiceImp<>(labmasterService)).passwordEncoder(getEncoder());
+        manager.userDetailsService(new EntityDetailsServiceImp<>(service)).passwordEncoder(getEncoder());
+        manager.userDetailsService(new EntityDetailsServiceImp<>(adminService)).passwordEncoder(getEncoder());
+
     }
 }
