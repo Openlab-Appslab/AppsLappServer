@@ -1,6 +1,7 @@
 package org.appslapp.AppsLappServer.business.pojo.lab;
 
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
+import org.appslapp.AppsLappServer.exceptions.LabAlreadyExistsException;
 import org.appslapp.AppsLappServer.persistance.LabRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,10 @@ public class LabService {
 
     public long createLab(Lab lab, LabmasterService labmasterService, String username) {
         var labmaster = labmasterService.getUserByName(username);
+
+        if (labmaster.getLab() != null)
+            throw new LabAlreadyExistsException(lab.getName());
+
         lab.setLabmaster(labmaster);
         var id = save(lab);
         labmaster.setLab(lab);
