@@ -37,7 +37,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("login")
-    public long login(@AuthenticationPrincipal UserDetails details) {
+    public long login() {
         return 0;
     }
 
