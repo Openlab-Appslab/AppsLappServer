@@ -55,6 +55,7 @@ public class LabController {
         lab.setStudentNames(List.of(rawLab.get(("studentNames")).split(",,,")));
         var labmaster = labmasterService.getUserByName(user.getUsername());
         lab.setLabmaster(labmaster);
+        labService.save(lab);
         labmaster.setLab(lab);
         labmasterService.save(labmaster);
         return 0;
