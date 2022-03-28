@@ -1,7 +1,6 @@
 package org.appslapp.AppsLappServer.business.security;
 
 import org.appslapp.AppsLappServer.business.pojo.users.admin.AdminService;
-import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsServiceImp;
@@ -10,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
@@ -19,13 +17,13 @@ import java.util.List;
 
 @EnableWebSecurity
 public class AuthenticationManager extends WebSecurityConfigurerAdapter {
-    private final UserService service;
+    private final UserService userService;
     private final LabmasterService labmasterService;
     private final AdminService adminService;
 
-    public AuthenticationManager(@Autowired UserService service, @Autowired LabmasterService lab,
+    public AuthenticationManager(@Autowired UserService userService, @Autowired LabmasterService lab,
                                  @Autowired AdminService admin) {
-        this.service = service;
+        this.userService = userService;
         this.labmasterService = lab;
         this.adminService = admin;
     }
@@ -72,9 +70,6 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder manager) throws Exception {
-        manager.userDetailsService(new EntityDetailsServiceImp<>(labmasterService)).passwordEncoder(getEncoder());
-        manager.userDetailsService(new EntityDetailsServiceImp<>(service)).passwordEncoder(getEncoder());
-        manager.userDetailsService(new EntityDetailsServiceImp<>(adminService)).passwordEncoder(getEncoder());
-
+        manager.userDetailsService(new EntityDetailsServiceImp<>(List.of(labmasterService, adminService, userService))).passwordEncoder(getEncoder());
     }
 }

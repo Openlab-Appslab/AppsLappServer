@@ -4,7 +4,7 @@ import net.bytebuddy.utility.RandomString;
 import org.appslapp.AppsLappServer.business.pojo.users.entity.EntityService;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.exceptions.UnsatisfyingPasswordException;
-import org.appslapp.AppsLappServer.exceptions.UserDoesntExistException;
+import org.appslapp.AppsLappServer.exceptions.UserNotFoundException;
 import org.appslapp.AppsLappServer.exceptions.UsernameAlreadyExistsException;
 import org.appslapp.AppsLappServer.persistance.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class UserService implements EntityService<User> {
 
     public String verifyUser(String code) {
         var user = userRepository.findByVerificationCode(code)
-                .orElseThrow(() -> new UserDoesntExistException(code));
+                .orElseThrow(() -> new UserNotFoundException(code));
         user.setEnabled(true);
         save(user);
         return user.getEmail();
@@ -91,7 +91,7 @@ public class UserService implements EntityService<User> {
 
     @Override
     public User getUserByName(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new UserDoesntExistException(username));
+        return userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username));
     }
 
     public long resendEmail(String username) {

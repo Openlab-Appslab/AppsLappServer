@@ -1,8 +1,7 @@
 package org.appslapp.AppsLappServer.business.pojo.users.labmaster;
 
 import org.appslapp.AppsLappServer.business.pojo.users.entity.EntityService;
-import org.appslapp.AppsLappServer.business.pojo.users.user.User;
-import org.appslapp.AppsLappServer.exceptions.UserDoesntExistException;
+import org.appslapp.AppsLappServer.exceptions.UserNotFoundException;
 import org.appslapp.AppsLappServer.persistance.users.LabmasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +19,7 @@ public class LabmasterService implements EntityService<Labmaster> {
 
     @Override
     public Labmaster getUserByName(String name) {
-        return labmasterRepository.findByUsername(name).orElseThrow(() -> new UserDoesntExistException(name));
+        return labmasterRepository.findByUsername(name).orElseThrow(() -> new UserNotFoundException(name));
     }
 
     public long save(Labmaster master) {

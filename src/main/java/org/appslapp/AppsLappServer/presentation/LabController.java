@@ -6,8 +6,10 @@ import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercis
 import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercisesService;
 import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
 import org.appslapp.AppsLappServer.business.pojo.lab.LabService;
+import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
+import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;
 import org.appslapp.AppsLappServer.business.security.users.labmaster.LabmasterDetailsImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -47,16 +49,15 @@ public class LabController {
     }
 
     @PostMapping("createLab")
-    public long createLab(@RequestBody Map<String, String> test, @AuthenticationPrincipal LabmasterDetailsImp user) {
+    public long createLab(@RequestBody Map<String, String> rawLab, @AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
         Lab lab = new Lab();
-        lab.setName(test.get("name"));
-        lab.setStudentNames(List.of(test.get(("studentNames")).split(",,,")));
+        lab.setName(rawLab.get("name"));
+        lab.setStudentNames(List.of(rawLab.get(("studentNames")).split(",,,")));
         var labmaster = labmasterService.getUserByName(user.getUsername());
         lab.setLabmaster(labmaster);
         labmaster.setLab(lab);
-        var id = labService.save(lab);
         labmasterService.save(labmaster);
-        return id;
+        return 0;
     }
 
     @GetMapping("getLab")
