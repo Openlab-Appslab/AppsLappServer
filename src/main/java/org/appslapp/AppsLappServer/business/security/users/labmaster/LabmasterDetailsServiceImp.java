@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LabmasterDetailsServiceImp extends EntityDetailsServiceImp<Labmaster, LabmasterService>
         implements UserDetailsService {
+
     public LabmasterDetailsServiceImp(@Autowired LabmasterService service) {
         super(service);
     }

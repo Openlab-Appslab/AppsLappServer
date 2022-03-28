@@ -18,6 +18,6 @@ public class UserDetailsServiceImp extends EntityDetailsServiceImp<User, UserSer
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new EntityDetailsImp<>(getUserByUsername(username));
+        return new EntityDetailsImp<User>(getUserByUsername(username));
     }
 }
