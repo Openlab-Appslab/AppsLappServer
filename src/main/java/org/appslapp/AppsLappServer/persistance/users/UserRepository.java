@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
-    Optional<User> findByUsername(String username);
+public interface UserRepository extends EntityRepository<User> {
     Optional<User> findByEmail(String email);
     Optional<User> findByVerificationCode(String code);
     List<User> findAllByAuthorityAndEnabled(String authority, boolean enabled);

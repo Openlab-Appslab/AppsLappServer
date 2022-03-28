@@ -35,7 +35,8 @@ public class LabController {
 
     public LabController(@Autowired UserService userService, @Autowired LabService labService,
                          @Autowired ExerciseService exerciseService,
-                         @Autowired GroupOfExercisesService groupOfExercisesService, @Autowired LabmasterService labmasterService) {
+                         @Autowired GroupOfExercisesService groupOfExercisesService,
+                         @Autowired LabmasterService labmasterService) {
         this.userService = userService;
         this.labService = labService;
         this.exerciseService = exerciseService;
@@ -49,16 +50,9 @@ public class LabController {
     }
 
     @PostMapping("createLab")
-    public long createLab(@RequestBody Map<String, String> rawLab, @AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
-        Lab lab = new Lab();
-        lab.setName(rawLab.get("name"));
-        lab.setStudentNames(List.of(rawLab.get(("studentNames")).split(",,,")));
-        var labmaster = labmasterService.getUserByName(user.getUsername());
-        lab.setLabmaster(labmaster);
-        labService.save(lab);
-        labmaster.setLab(lab);
-        labmasterService.save(labmaster);
-        return 0;
+    public long createLab(@RequestBody Map<String, String> rawLab,
+                          @AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
+        return labService.createLab(rawLab, labmasterService, user.getUsername());
     }
 
     @GetMapping("getLab")

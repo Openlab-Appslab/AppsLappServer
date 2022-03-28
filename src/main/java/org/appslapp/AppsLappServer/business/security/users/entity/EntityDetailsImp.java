@@ -64,4 +64,8 @@ public class EntityDetailsImp<T extends Entity> implements UserDetails {
     public String getFirstName() {
         return user.getFirstName();
     }
+
+    public T getUser() {
+        return user;
+    }
 }
