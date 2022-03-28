@@ -23,7 +23,7 @@ public class Lab {
     @OneToOne(mappedBy = "lab")
     private Labmaster labmaster;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER) //Spytat sa martina ci neni better solution lebo toto je HUGE performance hit
     private List<String> studentNames;
 
     @NotBlank
