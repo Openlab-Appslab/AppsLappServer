@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface LabmasterRepository extends CrudRepository<Labmaster, Long> {
-    Optional<Labmaster> findByUsername(String username);
+public interface LabmasterRepository extends EntityRepository<Labmaster> {
 }
