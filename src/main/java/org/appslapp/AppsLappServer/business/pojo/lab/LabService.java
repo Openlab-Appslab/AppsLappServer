@@ -24,13 +24,9 @@ public class LabService {
 
     public long createLab(Lab lab, LabmasterService labmasterService, String username) {
         var labmaster = labmasterService.getUserByName(username);
-
-        if (labmaster.getLab() != null)
-            throw new LabAlreadyExistsException(lab.getName());
-
         lab.setLabmaster(labmaster);
         var id = save(lab);
-        labmaster.setLab(lab);
+        labmaster.getLabs().add(lab);
         labmasterService.update(labmaster);
         return id;
     }

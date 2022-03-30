@@ -56,8 +56,8 @@ public class LabController {
     }
 
     @GetMapping("getLab")
-    public Lab getLab(@AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
-        return user.getUser().getLab();
+    public List<Lab> getLab(@AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
+        return user.getUser().getLabs();
     }
 
     @PostMapping("createExercise")

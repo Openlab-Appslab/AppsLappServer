@@ -15,7 +15,7 @@ public class LabmasterDetailsImp extends EntityDetailsImp<Labmaster> {
         super(labmaster);
     }
 
-    public Lab getLab() {
-        return user.getLab();
+    public List<Lab> getLabs() {
+        return user.getLabs();
     }
 }

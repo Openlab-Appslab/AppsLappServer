@@ -60,7 +60,7 @@ public class AuthenticationController {
     //Only for test purposes
     @PostMapping("createAdmins")
     public void tem() {
-        var admin = new Admin();
+        /*var admin = new Admin();
         admin.setUsername("admin");
         admin.setPassword("Heslo123_");
         admin.setFirstName("Martinko");
@@ -78,7 +78,7 @@ public class AuthenticationController {
         user.setEnabled(true);
         user.setEmail("emailovaadresa@gmail.com");
         user.setAuthority("PUPIL");
-        userService.save(user);
+        userService.save(user);*/
 
         var labmaster =  new Labmaster();
         labmaster.setUsername("ratatui");

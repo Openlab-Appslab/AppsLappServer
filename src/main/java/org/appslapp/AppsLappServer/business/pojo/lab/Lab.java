@@ -20,7 +20,8 @@ public class Lab {
     private long id;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "lab")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "labmaster_id", nullable = false)
     private Labmaster labmaster;
 
     @ElementCollection(fetch = FetchType.EAGER) //Spytat sa martina ci neni better solution lebo toto je HUGE performance hit
