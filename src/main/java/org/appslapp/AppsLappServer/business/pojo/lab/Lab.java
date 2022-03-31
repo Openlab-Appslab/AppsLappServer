@@ -23,7 +23,7 @@ public class Lab {
     @JoinColumn(name = "labmaster_id", nullable = false)
     private Labmaster labmaster;
 
-    @ElementCollection(fetch = FetchType.EAGER)git s
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> studentNames;
 
     @NotBlank
