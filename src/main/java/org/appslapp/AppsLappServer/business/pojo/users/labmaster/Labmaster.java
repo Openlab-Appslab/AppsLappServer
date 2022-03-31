@@ -14,6 +14,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Labmaster extends org.appslapp.AppsLappServer.business.pojo.users.entity.Entity {
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "labmaster")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "labmaster")
     private List<Lab> labs;
 }
