@@ -5,8 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
 
-import javax.persistence.*;
-import javax.validation.constraints.Pattern;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity

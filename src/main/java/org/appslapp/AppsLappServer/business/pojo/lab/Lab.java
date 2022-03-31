@@ -19,7 +19,6 @@ public class Lab {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "labmaster_id", nullable = false)
     private Labmaster labmaster;
