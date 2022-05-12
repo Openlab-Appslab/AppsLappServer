@@ -10,7 +10,8 @@ import java.util.List;
 public class ExerciseService {
     private final ExerciseRepository exerciseRepository;
 
-    public ExerciseService(@Autowired ExerciseRepository exerciseRepository) {
+    @Autowired
+    public ExerciseService(ExerciseRepository exerciseRepository) {
         this.exerciseRepository = exerciseRepository;
     }
 

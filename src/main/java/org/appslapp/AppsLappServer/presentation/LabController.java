@@ -33,10 +33,11 @@ public class LabController {
     private final GroupOfExercisesService groupOfExercisesService;
     private final LabmasterService labmasterService;
 
-    public LabController(@Autowired UserService userService, @Autowired LabService labService,
-                         @Autowired ExerciseService exerciseService,
-                         @Autowired GroupOfExercisesService groupOfExercisesService,
-                         @Autowired LabmasterService labmasterService) {
+    @Autowired
+    public LabController(UserService userService, LabService labService,
+                         ExerciseService exerciseService,
+                         GroupOfExercisesService groupOfExercisesService,
+                         LabmasterService labmasterService) {
         this.userService = userService;
         this.labService = labService;
         this.exerciseService = exerciseService;

@@ -9,7 +9,8 @@ public class GroupOfExercisesService {
 
     private final GroupOfExercisesRepository groupOfExercisesRepository;
 
-    public GroupOfExercisesService(@Autowired GroupOfExercisesRepository groupOfExercisesRepository) {
+    @Autowired
+    public GroupOfExercisesService(GroupOfExercisesRepository groupOfExercisesRepository) {
         this.groupOfExercisesRepository = groupOfExercisesRepository;
     }
 

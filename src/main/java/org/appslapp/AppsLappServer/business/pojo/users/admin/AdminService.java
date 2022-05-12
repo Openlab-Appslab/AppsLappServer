@@ -13,7 +13,8 @@ public class AdminService implements EntityService<Admin> {
     private final AdminRepository adminRepository;
     private final PasswordEncoder encoder;
 
-    public AdminService(@Autowired AdminRepository adminRepository, @Autowired PasswordEncoder encoder) {
+    @Autowired
+    public AdminService(AdminRepository adminRepository, PasswordEncoder encoder) {
         this.adminRepository = adminRepository;
         this.encoder = encoder;
     }
