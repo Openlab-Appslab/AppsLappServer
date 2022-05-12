@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 public class LabService {
     private final LabRepository labRepository;
 
-    public LabService(@Autowired LabRepository labRepository) {
+    @Autowired
+    public LabService(LabRepository labRepository) {
         this.labRepository = labRepository;
     }
 
@@ -19,7 +20,6 @@ public class LabService {
 
     public long createLab(Lab lab, LabmasterService labmasterService, String username) {
         var labmaster = labmasterService.getUserByName(username);
-        lab.setLabmaster(labmaster);
         var id = save(lab);
         labmaster.getLabs().add(lab);
         labmasterService.update(labmaster);

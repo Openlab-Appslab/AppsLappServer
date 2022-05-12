@@ -1,10 +1,7 @@
 package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.pojo.users.entity.Entity;
-import org.appslapp.AppsLappServer.business.pojo.users.user.User;
-import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
