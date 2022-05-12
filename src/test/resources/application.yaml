@@ -1,42 +1,9 @@
 spring:
-  cache:
-    cache-names:
-      - rate-limit-buckets
-    caffeine:
-      spec: maximumSize=100000,expireAfterAccess=120s
-
-  #Release
   datasource:
-    url: jdbc:h2/
     username: sa
     password: sa
-    driver-class-name: org.
-
-  mvc:
-    log-request-details: true
-
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ${EMAIL_USERNAME}
-    password: ${EMAIL_PASSWORD}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-
+    url: jdbc:h2//:mem:db;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: update
-
-debug: true
-server:
-  port: ${PORT:8080}
-
-logging:
-  level:
-    org:
-      springframework:
-        web: DEBUG
+      ddl-auto: create-drop

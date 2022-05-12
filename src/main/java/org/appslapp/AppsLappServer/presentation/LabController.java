@@ -55,7 +55,7 @@ public class LabController {
         return labService.createLab(lab, labmasterService, user.getUsername());
     }
 
-    @GetMapping("getLab")
+    @GetMapping("getLabs")
     public List<Lab> getLab(@AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
         return user.getUser().getLabs();
     }

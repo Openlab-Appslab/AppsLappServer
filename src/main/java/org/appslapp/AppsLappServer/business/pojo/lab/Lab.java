@@ -19,12 +19,11 @@ public class Lab {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "labmaster_id", nullable = false)
     private Labmaster labmaster;
 
-    @ElementCollection(fetch = FetchType.EAGER) //Spytat sa martina ci neni better solution lebo toto je HUGE performance hit
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> studentNames;
 
     @NotBlank

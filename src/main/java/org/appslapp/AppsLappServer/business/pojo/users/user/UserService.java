@@ -24,8 +24,9 @@ public class UserService implements EntityService<User> {
     private final PasswordEncoder encoder;
     private final JavaMailSender mailSender;
 
-    public UserService(@Autowired UserRepository repository, @Autowired PasswordEncoder encoder,
-                       @Autowired JavaMailSender sender) {
+    @Autowired
+    public UserService(UserRepository repository, PasswordEncoder encoder,
+                       JavaMailSender sender) {
         super();
         this.userRepository = repository;
         this.encoder = encoder;

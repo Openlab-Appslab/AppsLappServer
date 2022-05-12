@@ -34,7 +34,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
         config.setAllowedHeaders(
                 List.of("Authorization", "Cache-Control", "Content-Type", "X-PT-SESSION-ID", "NGSW-BYPASS"));
         config.setAllowedOrigins(List.of("https://appslappapp.vercel.app", "http://localhost:4200/"));
-        config.setAllowedMethods(List.of("GET", "POST∏", "PUT", "DELETE", "PUT", "OPTIONS", "PATCH", "DELETE"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT", "OPTIONS", "PATCH", "DELETE"));
         config.setAllowCredentials(true);
         config.setExposedHeaders(List.of("Authorization"));
 
@@ -48,7 +48,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/management/getLabs").hasAnyAuthority("ADMIN", "LABMASTER")
                 .mvcMatchers("/api/management/createExercise").hasAnyAuthority("ADMIN", "LABMASTER")
                 .mvcMatchers("/api/management/createGroupOfExercises").hasAnyAuthority("LABMASTER")
-                .mvcMatchers("/api/management/getLab").hasAnyAuthority("LABMASTER")
+                .mvcMatchers("/api/management/getLabs").hasAnyAuthority("LABMASTER")
                 .mvcMatchers("/api/management/getAllExercises").hasAnyAuthority("ADMIN", "LABMASTER")
                 .mvcMatchers("/api/management/createExercise").hasAnyAuthority("ADMIN", "LABMASTER")
                 .mvcMatchers("/api/auth/promoteToLabmaster").hasAnyAuthority("ADMIN")
@@ -70,6 +70,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder manager) throws Exception {
-        manager.userDetailsService(new EntityDetailsServiceImp<>(List.of(labmasterService, adminService, userService))).passwordEncoder(getEncoder());
+        manager.userDetailsService(new EntityDetailsServiceImp<>(
+                List.of(labmasterService, adminService, userService))).passwordEncoder(getEncoder());
     }
 }
