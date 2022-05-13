@@ -6,14 +6,16 @@ import org.appslapp.AppsLappServer.persistance.LabRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class LabServiceTest {
@@ -31,19 +33,21 @@ class LabServiceTest {
     void createLab() {
         // given
         var lab = new Lab();
+        lab.setId(123);
         lab.setStudentNames(List.of("haha", "ratata"));
         lab.setName("testik");
-
         var labmaster = new Labmaster();
+        labmaster.setLabs(new ArrayList<>());
         labmaster.setUsername("test");
+        lab.setLabmaster(labmaster);
+        when(labRepository.save(any(Lab.class))).thenReturn(lab);
+        when(labmasterService.getUserByName(anyString())).thenReturn(labmaster);
+        when(labmasterService.update(any(Labmaster.class))).thenReturn(1L);
 
         // when
-        underTest.createLab(lab, labmasterService, "test");
+        long id = underTest.createLab(lab, labmasterService, "test");
 
         // then
-        var capture = ArgumentCaptor.forClass(Lab.class);
-        verify(labRepository).save(capture.capture());
-
-        assertThat(lab).isEqualTo(capture.getValue());
+        assertThat(id).isEqualTo(123);
     }
 }
