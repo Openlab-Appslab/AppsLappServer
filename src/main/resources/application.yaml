@@ -22,10 +22,10 @@ spring:
   #  password: ${MYSQL_DATABASE_PASSWORD}
 
   mail:
-    host: smtp.gmail.com
+    host: smtp.mail.yahoo.com
     port: 587
-    username: ${EMAIL_USERNAME}
-    password: ${EMAIL_PASSWORD}
+    username: appslappmanagement@yahoo.com
+    password: Heslo123.
     properties:
       mail:
         smtp:

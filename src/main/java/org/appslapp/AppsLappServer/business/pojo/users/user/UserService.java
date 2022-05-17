@@ -75,15 +75,14 @@ public class UserService implements EntityService<User> {
 
         user.setVerificationCode(RandomString.make(64));
 
-        var id = userRepository.save(user).getId();
-
         try {
             sendVerificationEmail(user);
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        user.setEnabled(true); // debug only
+        return userRepository.save(user).getId();
 
-        return id;
     }
 
     public Optional<User> getUserById(long id) {
@@ -144,7 +143,11 @@ public class UserService implements EntityService<User> {
 
         helper.setText(content, true);
 
-        mailSender.send(message);
+        try {
+            mailSender.send(message);
+        } catch (Exception ignored) {
+
+        }
     }
 
     public Labmaster createLabmaster(String username, String password) {
