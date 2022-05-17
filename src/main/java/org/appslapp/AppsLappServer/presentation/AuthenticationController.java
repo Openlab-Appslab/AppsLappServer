@@ -20,8 +20,9 @@ public class AuthenticationController {
     private final AdminService adminService;
     private final LabmasterService labmasterService;
 
-    public AuthenticationController(@Autowired UserService userService, @Autowired AdminService adminService,
-                                    @Autowired LabmasterService labmasterService) {
+    @Autowired
+    public AuthenticationController(UserService userService, AdminService adminService,
+                                    LabmasterService labmasterService) {
         this.userService = userService;
         this.adminService = adminService;
         this.labmasterService = labmasterService;

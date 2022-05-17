@@ -12,7 +12,8 @@ public class LabmasterService implements EntityService<Labmaster> {
     private final LabmasterRepository labmasterRepository;
     private final PasswordEncoder encoder;
 
-    public LabmasterService(@Autowired LabmasterRepository labmasterRepository, @Autowired PasswordEncoder encoder) {
+    @Autowired
+    public LabmasterService(LabmasterRepository labmasterRepository, PasswordEncoder encoder) {
         this.labmasterRepository = labmasterRepository;
         this.encoder = encoder;
     }

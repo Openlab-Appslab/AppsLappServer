@@ -21,8 +21,9 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
     private final LabmasterService labmasterService;
     private final AdminService adminService;
 
-    public AuthenticationManager(@Autowired UserService userService, @Autowired LabmasterService lab,
-                                 @Autowired AdminService admin) {
+    @Autowired
+    public AuthenticationManager(UserService userService, LabmasterService lab,
+                                 AdminService admin) {
         this.userService = userService;
         this.labmasterService = lab;
         this.adminService = admin;
