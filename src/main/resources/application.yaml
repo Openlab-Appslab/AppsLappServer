@@ -1,31 +1,18 @@
 spring:
-  cache:
-    cache-names:
-      - rate-limit-buckets
-    caffeine:
-      spec: maximumSize=100000,expireAfterAccess=120s
-
-  #Release
   datasource:
-    url: jdbc:postgresql://ec2-54-216-90-155.eu-west-1.compute.amazonaws.com/dbpo6jt9dd7hja
-    username: lkksxiirbgqdbj
-    password: 4a90439d38fe5d73319cf63247ac0bfc5468571f4e8412fa9428d0f1fea0af5e
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   mvc:
     log-request-details: true
 
-  #Debug local only
-  #datasource:
-  #  url: jdbc:mysql://localhost:3306/appslapp
-  #  username: computer
-  #  password: ${MYSQL_DATABASE_PASSWORD}
-
   mail:
     host: smtp.mail.yahoo.com
     port: 587
-    username: appslappmanagement@yahoo.com
-    password: Heslo123.
+    username:
+    password:
     properties:
       mail:
         smtp:
@@ -39,7 +26,7 @@ spring:
 
 debug: true
 server:
-  port: ${PORT:8080}
+  port: 8080
 
 logging:
   level:

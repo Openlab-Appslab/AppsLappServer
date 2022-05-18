@@ -4,7 +4,7 @@ import org.appslapp.AppsLappServer.business.pojo.users.admin.AdminService;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
