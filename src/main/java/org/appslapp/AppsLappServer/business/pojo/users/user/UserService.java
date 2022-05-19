@@ -54,7 +54,7 @@ public class UserService implements EntityService<User> {
         var user = userRepository.findByVerificationCode(code)
                 .orElseThrow(() -> new UserNotFoundException(code));
         user.setEnabled(true);
-        save(user);
+        update(user);
         return user.getEmail();
     }
 

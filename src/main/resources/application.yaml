@@ -30,8 +30,8 @@ logging:
       springframework:
         web: DEBUG
       hibernate: ERROR
-    root: DEBUG
+    root: WARN
 
 
 server:
-  port : ${PORT:5000}
+  port : ${PORT:8081}
