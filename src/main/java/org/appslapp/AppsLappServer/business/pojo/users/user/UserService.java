@@ -78,9 +78,9 @@ public class UserService implements EntityService<User> {
         try {
             sendVerificationEmail(user);
         } catch (MessagingException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            user.setEnabled(true); // debug only
         }
-        user.setEnabled(true); // debug only
+
         return userRepository.save(user).getId();
 
     }
