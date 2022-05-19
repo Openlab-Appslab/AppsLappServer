@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/auth/")
 public class AuthenticationController {
