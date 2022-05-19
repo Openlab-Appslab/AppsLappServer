@@ -35,12 +35,14 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedHeaders(
                 List.of("Authorization", "Cache-Control", "Content-Type", "X-PT-SESSION-ID", "NGSW-BYPASS"));
-        config.setAllowedOrigins(List.of("localhost:4200"));
+        config.setAllowedOrigins(List.of("http://localhost:4200", "https://appslappapp.vercel.app"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT", "OPTIONS", "PATCH", "DELETE"));
         config.setAllowCredentials(true);
         config.setExposedHeaders(List.of("Authorization"));
 
-        http.authorizeRequests()
+        http.cors().configurationSource(request -> config)
+                .and()
+                .authorizeRequests()
                 .mvcMatchers("/api/auth/register").permitAll()
                 .mvcMatchers("/api/auth/verify*").permitAll()
                 .mvcMatchers("/api/auth/login").hasAnyAuthority("PUPIL", "ADMIN", "LABMASTER")
