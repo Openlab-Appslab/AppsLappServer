@@ -20,7 +20,10 @@ public class AppsLappServerApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").allowedHeaders("*");
+				registry.addMapping("/**")
+						.allowedOrigins("http://localhost:4200", "https://appslappapp.vercel.app")
+						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+						.allowCredentials(true);
 			}
 		};
 	}
