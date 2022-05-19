@@ -35,7 +35,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedHeaders(
                 List.of("Authorization", "Cache-Control", "Content-Type", "X-PT-SESSION-ID", "NGSW-BYPASS"));
-        config.setAllowedOrigins(List.of("*"));
+        config.setAllowedOrigins(List.of("localhost:4200"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT", "OPTIONS", "PATCH", "DELETE"));
         config.setAllowCredentials(true);
         config.setExposedHeaders(List.of("Authorization"));
