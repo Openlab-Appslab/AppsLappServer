@@ -143,11 +143,7 @@ public class UserService implements EntityService<User> {
 
         helper.setText(content, true);
 
-        try {
-            mailSender.send(message);
-        } catch (Exception ignored) {
-
-        }
+        mailSender.send(message);
     }
 
     public Labmaster createLabmaster(String username, String password) {
