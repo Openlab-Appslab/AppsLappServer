@@ -137,7 +137,7 @@ public class UserService implements EntityService<User> {
 
         content = content.replace("[[name]]", user.getUsername());
 
-        String verifyURL = "https://apps-lapp-server.herokuapp.com" + "/api/auth/verify?code=" + user.getVerificationCode();
+        String verifyURL = "https://apps-lapp-server.herokuapp.com" + "/api/auth/verify/" + user.getVerificationCode();
 
         content = content.replace("[[URL]]", verifyURL);
 

@@ -43,8 +43,8 @@ public class AuthenticationController {
         return userService.resendEmail(username);
     }
 
-    @GetMapping("verify")
-    public ResponseEntity<Void> verifyEmail(@RequestParam(name="code") String code) {
+    @GetMapping("verify/{code}")
+    public ResponseEntity<Void> verifyEmail(@PathVariable String code) {
         return ResponseEntity.status(HttpStatus.OK).location(
                 URI.create("https://appslappapp.vercel.app/emailV?email=" + userService.verifyUser(code))).build();
     }
