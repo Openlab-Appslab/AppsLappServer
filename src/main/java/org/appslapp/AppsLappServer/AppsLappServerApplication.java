@@ -14,17 +14,4 @@ public class AppsLappServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AppsLappServerApplication.class, args);
 	}
-
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:4200", "https://appslappapp.vercel.app")
-						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-						.allowCredentials(true);
-			}
-		};
-	}
 }
