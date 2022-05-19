@@ -29,6 +29,9 @@ logging:
     org:
       springframework:
         web: DEBUG
+      hibernate: ERROR
+    root: DEBUG
+
 
 server:
   port : 8080
