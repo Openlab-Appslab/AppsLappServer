@@ -18,8 +18,7 @@ public class ExerciseService {
 
     public long save(Exercise exercise, GroupOfExercisesService service) {
         service.save(exercise.getGroupOfExercises());
-        Long id = exerciseRepository.save(exercise).getId();
-        return id;
+        return exerciseRepository.save(exercise).getId();
     }
 
     public List<Exercise> getAllExercises() {

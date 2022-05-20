@@ -6,10 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,16 +26,18 @@ public class Lab {
     private long id;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "labmaster_id", nullable = false)
     private Labmaster labmaster;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
+    @Fetch(FetchMode.JOIN)
     private List<String> studentNames;
 
     @NotBlank
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lab")
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<GroupOfExercises> groupOfExercises;
 }

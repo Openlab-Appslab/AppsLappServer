@@ -23,7 +23,7 @@ public class GroupOfExercises {
     @OneToMany(mappedBy = "groupOfExercises")
     private List<Exercise> exercises;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "lab_id")
     private Lab lab;
 
