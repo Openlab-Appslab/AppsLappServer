@@ -59,6 +59,11 @@ public class LabController {
         return user.getUser().getLabs();
     }
 
+    @GetMapping("getLab/{labId}")
+    public Lab getLab(@PathVariable long labId) {
+        return labService.getLab(labId);
+    }
+
     @PostMapping("createExercise")
     public Long createExercise(@RequestBody ExerciseWithGroupHelper body) {
         var exercise = new Exercise();
