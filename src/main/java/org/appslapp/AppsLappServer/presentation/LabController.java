@@ -12,6 +12,7 @@ import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterServic
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;
 import org.appslapp.AppsLappServer.business.security.users.labmaster.LabmasterDetailsImp;
+import org.appslapp.AppsLappServer.exceptions.GroupOfExercisesNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -65,9 +66,18 @@ public class LabController {
         exercise.setName(body.getName());
         exercise.setMaxStars(body.getMaxStars());
         exercise.setMinStars(body.getMinStars());
-        var group = groupOfExercisesService.getGroupOfExercisesByName(body.getGroup());
-        group.getExercises().add(exercise);
-        return exerciseService.save(exercise, groupOfExercisesService);
+        try {
+            var group = groupOfExercisesService.getGroupOfExercisesByName(body.getGroup());
+            group.getExercises().add(exercise);
+            exercise.setGroupOfExercises(group);
+            return exerciseService.save(exercise, groupOfExercisesService);
+        } catch (GroupOfExercisesNotFoundException ignored) {
+            var group = new GroupOfExercises();
+            group.setName(body.getGroup());
+            group.setExercises(List.of(exercise));
+            exercise.setGroupOfExercises(group);
+            return exerciseService.save(exercise, groupOfExercisesService);
+        }
     }
 
     @GetMapping("getAllExercises")
