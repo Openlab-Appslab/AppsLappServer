@@ -31,6 +31,6 @@ public class Lab {
     @NotBlank
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "lab")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "lab")
     private List<GroupOfExercises> groupOfExercises;
 }
