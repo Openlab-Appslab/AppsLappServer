@@ -3,12 +3,9 @@ package org.appslapp.AppsLappServer.business.pojo.groupOfExercises;
 import lombok.Getter;
 import lombok.Setter;
 import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
+import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
@@ -25,4 +22,10 @@ public class GroupOfExercises {
 
     @OneToMany(mappedBy = "groupOfExercises")
     private List<Exercise> exercises;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "lab_id")
+    private Lab lab;
+
+    private String description;
 }

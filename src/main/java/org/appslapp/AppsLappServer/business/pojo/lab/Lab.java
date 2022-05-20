@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 
 import javax.persistence.*;
@@ -29,4 +30,7 @@ public class Lab {
 
     @NotBlank
     private String name;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "lab")
+    private List<GroupOfExercises> groupOfExercises;
 }
