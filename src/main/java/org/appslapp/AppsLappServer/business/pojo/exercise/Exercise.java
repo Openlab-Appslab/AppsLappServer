@@ -1,6 +1,8 @@
 package org.appslapp.AppsLappServer.business.pojo.exercise;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
 

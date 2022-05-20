@@ -1,5 +1,6 @@
 package org.appslapp.AppsLappServer.presentation;
 
+import org.appslapp.AppsLappServer.business.helper.ExerciseWithGroupHelper;
 import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
 import org.appslapp.AppsLappServer.business.pojo.exercise.ExerciseService;
 import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
@@ -58,8 +59,15 @@ public class LabController {
     }
 
     @PostMapping("createExercise")
-    public Long createExercise(@Valid @RequestBody Exercise exercise) {
-        return exerciseService.save(exercise);
+    public Long createExercise(@RequestBody ExerciseWithGroupHelper body) {
+        var exercise = new Exercise();
+        exercise.setDescription(body.getDescription());
+        exercise.setName(body.getName());
+        exercise.setMaxStars(body.getMaxStars());
+        exercise.setMinStars(body.getMinStars());
+        var group = groupOfExercisesService.getGroupOfExercisesByName(body.getGroup());
+        group.getExercises().add(exercise);
+        return exerciseService.save(exercise, groupOfExercisesService);
     }
 
     @GetMapping("getAllExercises")

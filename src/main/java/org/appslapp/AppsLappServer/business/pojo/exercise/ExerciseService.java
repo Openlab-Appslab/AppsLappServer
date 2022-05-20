@@ -1,5 +1,6 @@
 package org.appslapp.AppsLappServer.business.pojo.exercise;
 
+import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercisesService;
 import org.appslapp.AppsLappServer.persistance.ExerciseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,10 @@ public class ExerciseService {
         this.exerciseRepository = exerciseRepository;
     }
 
-    public long save(Exercise exercise) {
-        return exerciseRepository.save(exercise).getId();
+    public long save(Exercise exercise, GroupOfExercisesService service) {
+        Long id = exerciseRepository.save(exercise).getId();
+        service.save(exercise.getGroupOfExercises());
+        return id;
     }
 
     public List<Exercise> getAllExercises() {
