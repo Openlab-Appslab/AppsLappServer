@@ -1,10 +1,10 @@
 package org.appslapp.AppsLappServer.business.pojo.exercise;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
+import org.hibernate.annotations.LazyCollection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,6 +38,8 @@ public class Exercise {
 
     @ManyToOne
     @JoinColumn(name = "group_of_exercises_id")
+    @LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)
+    @JsonIgnore
     private GroupOfExercises groupOfExercises;
 
 }
