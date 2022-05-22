@@ -92,6 +92,11 @@ public class LabController {
         return exerciseService.getAllExercises().stream().map(ExerciseMapper::map).collect(Collectors.toList());
     }
 
+    @GetMapping("getAllGroups")
+    public List<GroupOfExercises> getAllGroups() {
+        return groupOfExercisesService.findAll();
+    }
+
     @PostMapping("createGroupOfExercises")
     public Long createGroupOfExercises(@Valid @RequestBody GroupOfExercises groupOfExercises) {
         return groupOfExercisesService.save(groupOfExercises);

@@ -4,9 +4,11 @@ import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercis
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface GroupOfExercisesRepository extends CrudRepository<GroupOfExercises, Long> {
     Optional<GroupOfExercises> findByName(String name);
+    List<GroupOfExercises> findAll();
 }
