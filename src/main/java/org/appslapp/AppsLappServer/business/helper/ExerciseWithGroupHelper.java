@@ -6,7 +6,7 @@ import lombok.Getter;
 public class ExerciseWithGroupHelper {
     private String name;
     private String description;
-    private String group;
+    private String groupName;
     private int maxStars;
     private int minStars;
 }

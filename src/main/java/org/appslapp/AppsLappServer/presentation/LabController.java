@@ -74,13 +74,13 @@ public class LabController {
         exercise.setMaxStars(body.getMaxStars());
         exercise.setMinStars(body.getMinStars());
         try {
-            var group = groupOfExercisesService.getGroupOfExercisesByName(body.getGroup());
+            var group = groupOfExercisesService.getGroupOfExercisesByName(body.getGroupName());
             group.getExercises().add(exercise);
             exercise.setGroupOfExercises(group);
             return exerciseService.save(exercise, groupOfExercisesService);
         } catch (GroupOfExercisesNotFoundException ignored) {
             var group = new GroupOfExercises();
-            group.setName(body.getGroup());
+            group.setName(body.getGroupName());
             group.setExercises(List.of(exercise));
             exercise.setGroupOfExercises(group);
             return exerciseService.save(exercise, groupOfExercisesService);
