@@ -85,8 +85,13 @@ public class UserService implements EntityService<User> {
 
     }
 
-    public Optional<User> getUserById(long id) {
-        return userRepository.findById(id);
+    public User getUserById(long id) {
+        Optional<User> user = userRepository.findById(id);
+
+        if (user.isEmpty()) {
+            throw new UserNotFoundException();
+        }
+        return user.get();
     }
 
     @Override

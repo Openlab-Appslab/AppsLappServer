@@ -12,6 +12,7 @@ import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
 import org.appslapp.AppsLappServer.business.pojo.lab.LabService;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
+import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;
 import org.appslapp.AppsLappServer.exceptions.GroupOfExercisesNotFoundException;
@@ -106,4 +107,10 @@ public class LabController {
     public void addExerciseToLab(@RequestBody GroupOfExercisesToLabHelper body){
 
     }
+
+    @GetMapping("getStudent/{studentId}")
+    public User getStudent(@PathVariable Long studentId) {
+        return userService.getUserById(studentId);
+    }
+
 }
