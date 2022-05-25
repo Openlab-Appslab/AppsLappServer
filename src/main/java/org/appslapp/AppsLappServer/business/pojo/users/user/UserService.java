@@ -162,4 +162,13 @@ public class UserService implements EntityService<User> {
         userRepository.delete(user);
         return labmaster;
     }
+
+    public User getUserByFullName(String fullName) {
+        var names = fullName.split(" ");
+        var user = userRepository.findByFirstNameAndLastName(names[0], names[1]);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException();
+        }
+        return user.get();
+    }
 }

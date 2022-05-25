@@ -13,4 +13,5 @@ public interface UserRepository extends EntityRepository<User> {
     Optional<User> findByEmail(String email);
     Optional<User> findByVerificationCode(String code);
     List<User> findAllByAuthorityAndEnabled(String authority, boolean enabled);
+    Optional<User> findByFirstNameAndLastName(String firstName, String lastName);
 }

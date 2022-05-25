@@ -56,9 +56,9 @@ public class LabController {
     public long createLab(@RequestBody CreateLabHelper body,
                           @AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
         var lab = new Lab();
-        lab.setName(body.getLabName());
-        lab.setStudentNames(body.getLabStudents().stream()
-                .map(userService::getUserByName)
+        lab.setName(body.getName());
+        lab.setStudentNames(body.getStudentNames().stream()
+                .map(userService::getUserByFullName)
                 .collect(Collectors.toList()));
         
         return labService.createLab(lab, labmasterService, user.getUsername());

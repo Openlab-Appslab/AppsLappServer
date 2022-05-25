@@ -9,6 +9,6 @@ import java.util.List;
 @Setter
 public class CreateLabHelper {
 
-    private List<String> labStudents;
-    private String labName;
+    private List<String> studentNames;
+    private String name;
 }
