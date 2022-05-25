@@ -110,9 +110,14 @@ public class LabController {
         return groupOfExercisesService.save(groupOfExercises);
     }
 
-    @PostMapping("addExerciseToLab")
+    @PostMapping("addGroupToLab")
     public void addExerciseToLab(@RequestBody GroupOfExercisesToLabHelper body){
-
+        var lab = labService.getLab(body.getLabId());
+        var groups = body.getGroupsOfExercises().stream()
+                .map(groupOfExercisesService::getGroupOfExercisesByName)
+                .collect(Collectors.toList());
+        lab.getGroupOfExercises().addAll(groups);
+        labService.save(lab);
     }
 
     @GetMapping("getStudent/{studentId}")
