@@ -1,6 +1,7 @@
 package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.Dto.ExerciseDto;
+import org.appslapp.AppsLappServer.business.helper.CreateLabHelper;
 import org.appslapp.AppsLappServer.business.helper.GroupOfExercisesToLabHelper;
 import org.appslapp.AppsLappServer.business.helper.ExerciseWithGroupHelper;
 import org.appslapp.AppsLappServer.business.mappers.ExerciseMapper;
@@ -52,8 +53,14 @@ public class LabController {
     }
 
     @PostMapping("createLab")
-    public long createLab(@RequestBody Lab lab,
+    public long createLab(@RequestBody CreateLabHelper body,
                           @AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
+        var lab = new Lab();
+        lab.setName(body.getLabName());
+        lab.setStudentNames(body.getLabStudents().stream()
+                .map(userService::getUserByName)
+                .collect(Collectors.toList()));
+        
         return labService.createLab(lab, labmasterService, user.getUsername());
     }
 
