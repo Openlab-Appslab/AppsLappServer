@@ -2,6 +2,7 @@ package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.Dto.ExerciseDto;
 import org.appslapp.AppsLappServer.business.helper.CreateLabHelper;
+import org.appslapp.AppsLappServer.business.helper.ExerciseUpdateHelper;
 import org.appslapp.AppsLappServer.business.helper.GroupOfExercisesToLabHelper;
 import org.appslapp.AppsLappServer.business.helper.ExerciseWithGroupHelper;
 import org.appslapp.AppsLappServer.business.mappers.ExerciseMapper;
@@ -124,5 +125,13 @@ public class LabController {
     public User getStudent(@PathVariable Long studentId) {
         return userService.getUserById(studentId);
     }
+
+     @PostMapping("updateScore")
+     public Long updateScore(@RequestBody ExerciseUpdateHelper body) {
+        var user = userService.getUserById(body.getStudentId());
+        user.setScore(user.getScore() + body.getScore());
+        user.getFinishedExercises().add(body.getExerciseName());
+        return null;
+     }
 
 }
