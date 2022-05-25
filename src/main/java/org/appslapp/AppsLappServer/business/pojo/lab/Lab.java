@@ -29,6 +29,7 @@ public class Lab {
     private Labmaster labmaster;
 
     @OneToMany
+    @JoinColumn(name = "lab_id")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<User> studentNames;
 
