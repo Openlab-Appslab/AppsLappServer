@@ -133,7 +133,8 @@ public class LabController {
         var user = userService.getUserById(body.getStudentId());
         user.setScore(user.getScore() + body.getScore());
         user.getFinishedExercises().add(body.getExerciseName());
-        return null;
+        userService.save(user);
+        return 1L;
      }
 
 }
