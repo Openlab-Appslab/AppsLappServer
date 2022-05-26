@@ -1,5 +1,6 @@
 package org.appslapp.AppsLappServer.business.pojo.groupOfExercises;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
@@ -28,5 +29,6 @@ public class GroupOfExercises {
 
     @ManyToOne
     @JoinColumn(name = "lab_id")
+    @JsonIgnore
     private Lab lab;
 }
