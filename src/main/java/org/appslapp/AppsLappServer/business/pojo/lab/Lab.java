@@ -40,6 +40,7 @@ public class Lab {
     private String name;
 
     @OneToMany
+    @JoinColumn(name = "lab_id")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<GroupOfExercises> groupOfExercises;
 }

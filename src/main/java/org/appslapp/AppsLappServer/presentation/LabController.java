@@ -19,6 +19,7 @@ import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;
 import org.appslapp.AppsLappServer.exceptions.GroupOfExercisesNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -112,13 +113,14 @@ public class LabController {
     }
 
     @PostMapping("addGroupToLab")
-    public void addExerciseToLab(@RequestBody GroupOfExercisesToLabHelper body){
+    public Long addExerciseToLab(@RequestBody GroupOfExercisesToLabHelper body){
         var lab = labService.getLab(body.getLabId());
         var groups = body.getGroupsOfExercises().stream()
                 .map(groupOfExercisesService::getGroupOfExercisesByName)
                 .collect(Collectors.toList());
         lab.getGroupOfExercises().addAll(groups);
         labService.save(lab);
+        return 1L;
     }
 
     @GetMapping("getStudent/{studentId}")
