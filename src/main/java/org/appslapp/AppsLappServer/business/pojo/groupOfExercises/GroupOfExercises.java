@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
 import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -21,11 +23,10 @@ public class GroupOfExercises {
     private String name;
 
     @OneToMany(mappedBy = "groupOfExercises")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Exercise> exercises;
 
     @ManyToOne
     @JoinColumn(name = "lab_id")
     private Lab lab;
-
-    private String description;
 }

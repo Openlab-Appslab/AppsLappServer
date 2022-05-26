@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -24,7 +26,8 @@ public class Lab {
     private long id;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne
+    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "labmaster_id", nullable = false)
     private Labmaster labmaster;
 
