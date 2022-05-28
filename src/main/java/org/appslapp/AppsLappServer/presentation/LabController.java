@@ -107,6 +107,11 @@ public class LabController {
         return groupOfExercisesService.findAll();
     }
 
+    @GetMapping("getExercise/{exerciseId}")
+    public Exercise getExercise(@PathVariable long exerciseId) {
+        return exerciseService.getExercise(exerciseId);
+    }
+
     @PostMapping("createGroupOfExercises")
     public Long createGroupOfExercises(@Valid @RequestBody GroupOfExercises groupOfExercises) {
         return groupOfExercisesService.save(groupOfExercises);
