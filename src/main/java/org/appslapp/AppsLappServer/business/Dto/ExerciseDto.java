@@ -8,7 +8,6 @@ import lombok.Setter;
 public class ExerciseDto {
     String name;
     String description;
-    int minStars;
-    int maxStars;
+    int requiredStars;
     String groupName;
 }
