@@ -62,6 +62,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/management/updateScore").hasAnyAuthority("LABMASTER")
                 .mvcMatchers("/api/auth/promoteToLabmaster").hasAnyAuthority("ADMIN")
                 .mvcMatchers("/api/auth/management/getExercise/*").hasAnyAuthority("LABMASTER")
+                .mvcMatchers("/api/auth/management/getExercise/*").hasAnyAuthority("LABMASTER")
                 .mvcMatchers("/api/auth/createAdmins").permitAll()
                 .anyRequest().denyAll()
                 .and()
