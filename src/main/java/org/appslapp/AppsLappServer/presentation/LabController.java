@@ -81,8 +81,7 @@ public class LabController {
         var exercise = new Exercise();
         exercise.setDescription(body.getDescription());
         exercise.setName(body.getName());
-        exercise.setMaxStars(body.getMaxStars());
-        exercise.setMinStars(body.getMinStars());
+        exercise.setRequiredStars(body.getRequiredStars());
         try {
             var group = groupOfExercisesService.getGroupOfExercisesByName(body.getGroupName());
             group.getExercises().add(exercise);

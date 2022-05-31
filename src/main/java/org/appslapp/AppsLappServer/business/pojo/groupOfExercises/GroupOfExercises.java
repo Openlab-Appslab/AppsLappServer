@@ -23,6 +23,10 @@ public class GroupOfExercises {
     @NotBlank
     private String name;
 
+    private int minStars;
+
+    private int maxStars;
+
     @OneToMany(mappedBy = "groupOfExercises")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Exercise> exercises;

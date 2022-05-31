@@ -31,10 +31,7 @@ public class Exercise {
     private String description;
 
     @Min(value = 0)
-    private int minStars;
-
-    @Max(value = 100)
-    private int maxStars;
+    private int requiredStars;
 
     @ManyToOne
     @JoinColumn(name = "group_of_exercises_id")
