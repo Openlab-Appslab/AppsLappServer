@@ -28,9 +28,9 @@ logging:
   level:
     org:
       springframework:
-        web: DEBUG
+        web: ERROR
       hibernate: ERROR
-    root: WARN
+    root: ERROR
 
 
 server:
