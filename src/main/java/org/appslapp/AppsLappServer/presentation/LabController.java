@@ -79,18 +79,21 @@ public class LabController {
     @PostMapping("createExercise")
     public Long createExercise(@RequestBody ExerciseWithGroupHelper body) {
         var exercise = new Exercise();
-        exercise.setDescription(body.getDescription());
-        exercise.setName(body.getName());
-        exercise.setRequiredStars(body.getRequiredStars());
+        exercise.setDescription(body.getExercise().getDescription());
+        exercise.setName(body.getExercise().getName());
+        exercise.setRequiredStars(body.getExercise().getRequiredStars());
         try {
-            var group = groupOfExercisesService.getGroupOfExercisesByName(body.getGroupName());
+            var group = groupOfExercisesService.getGroupOfExercisesByName(
+                    body.getExercise().getGroupName());
             group.getExercises().add(exercise);
             exercise.setGroupOfExercises(group);
             return exerciseService.save(exercise, groupOfExercisesService);
         } catch (GroupOfExercisesNotFoundException ignored) {
             var group = new GroupOfExercises();
-            group.setName(body.getGroupName());
+            group.setName(body.getExercise().getGroupName());
             group.setExercises(List.of(exercise));
+            group.setMinStars(body.getMinStars());
+            group.setMaxStars(body.getMaxStars());
             exercise.setGroupOfExercises(group);
             return exerciseService.save(exercise, groupOfExercisesService);
         }
@@ -140,5 +143,4 @@ public class LabController {
         userService.update(user);
         return 1L;
      }
-
 }
