@@ -17,6 +17,7 @@ import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterServic
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;
+import org.appslapp.AppsLappServer.exceptions.ExerciseNotFoundException;
 import org.appslapp.AppsLappServer.exceptions.GroupOfExercisesNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -79,6 +80,13 @@ public class LabController {
     @PostMapping("createExercise")
     public Long createExercise(@RequestBody ExerciseWithGroupHelper body) {
         var exercise = new Exercise();
+        
+        try {
+            exercise = exerciseService.getExerciseByName(body.getExercise().getName());
+        } catch (ExerciseNotFoundException ignored) {
+
+        }
+
         exercise.setDescription(body.getExercise().getDescription());
         exercise.setName(body.getExercise().getName());
         exercise.setRequiredStars(body.getExercise().getRequiredStars());
