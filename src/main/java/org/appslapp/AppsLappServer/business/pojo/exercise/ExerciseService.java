@@ -29,4 +29,8 @@ public class ExerciseService {
     public Exercise getExercise(long exerciseId) {
         return exerciseRepository.findById(exerciseId).orElseThrow(ExerciseNotFoundException::new);
     }
+
+    public Exercise getExerciseByName(String exerciseName) {
+        return exerciseRepository.findByName(exerciseName).orElseThrow(ExerciseNotFoundException::new);
+    }
 }
