@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -25,6 +25,11 @@ public class User extends org.appslapp.AppsLappServer.business.pojo.users.entity
     private int score;
 
     @ElementCollection
-    @Fetch(FetchMode.JOIN)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> finishedExercises;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "lab_id")
+    private Lab lab;
 }

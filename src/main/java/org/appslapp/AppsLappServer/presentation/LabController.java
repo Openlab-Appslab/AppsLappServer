@@ -163,4 +163,9 @@ public class LabController {
         exerciseService.deleteExercise(exerciseName);
         return 1L;
      }
+
+     @GetMapping("getLab")
+     public Lab getLab(@AuthenticationPrincipal User user) {
+        return user.getLab();
+     }
 }
