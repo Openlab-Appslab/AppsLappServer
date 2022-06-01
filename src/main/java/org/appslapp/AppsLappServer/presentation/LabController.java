@@ -157,4 +157,10 @@ public class LabController {
         userService.update(user);
         return 1L;
      }
+
+     @DeleteMapping("deleteExercise/{exerciseName}")
+     public Long deleteExercise(@PathVariable String exerciseName) {
+        exerciseService.deleteExercise(exerciseName);
+        return 1L;
+     }
 }

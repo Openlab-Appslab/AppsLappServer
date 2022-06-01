@@ -37,4 +37,8 @@ public class ExerciseService {
     public Exercise getExerciseByName(String exerciseName) {
         return exerciseRepository.findByName(exerciseName).orElseThrow(ExerciseNotFoundException::new);
     }
+
+    public void deleteExercise(String exerciseName) {
+        exerciseRepository.deleteByName(exerciseName);
+    }
 }

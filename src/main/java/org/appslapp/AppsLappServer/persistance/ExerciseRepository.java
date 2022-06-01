@@ -12,4 +12,6 @@ public interface ExerciseRepository extends CrudRepository<Exercise, Long> {
     List<Exercise> findAll();
 
     Optional<Exercise> findByName(String exerciseName);
+
+    void deleteByName(String exerciseName);
 }
