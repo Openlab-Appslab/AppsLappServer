@@ -80,7 +80,7 @@ public class LabController {
     @PostMapping("createExercise")
     public Long createExercise(@RequestBody ExerciseWithGroupHelper body) {
         var exercise = new Exercise();
-        
+
         try {
             exercise = exerciseService.getExerciseByName(body.getExercise().getName());
         } catch (ExerciseNotFoundException ignored) {
@@ -90,12 +90,18 @@ public class LabController {
         exercise.setDescription(body.getExercise().getDescription());
         exercise.setName(body.getExercise().getName());
         exercise.setRequiredStars(body.getExercise().getRequiredStars());
+
         try {
             var group = groupOfExercisesService.getGroupOfExercisesByName(
                     body.getExercise().getGroupName());
-            group.getExercises().add(exercise);
+            if (group.getExercises().contains(exercise)) {
+                group.getExercises().remove(exercise);
+                group.getExercises().add(exercise);
+            } else {
+                group.getExercises().add(exercise);
+            }
             exercise.setGroupOfExercises(group);
-            return exerciseService.save(exercise, groupOfExercisesService);
+            return exerciseService.save(exercise);
         } catch (GroupOfExercisesNotFoundException ignored) {
             var group = new GroupOfExercises();
             group.setName(body.getExercise().getGroupName());

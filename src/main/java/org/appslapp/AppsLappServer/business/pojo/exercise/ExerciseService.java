@@ -22,6 +22,10 @@ public class ExerciseService {
         return exerciseRepository.save(exercise).getId();
     }
 
+    public long save(Exercise exercise) {
+        return exerciseRepository.save(exercise).getId();
+    }
+
     public List<Exercise> getAllExercises() {
         return exerciseRepository.findAll();
     }
