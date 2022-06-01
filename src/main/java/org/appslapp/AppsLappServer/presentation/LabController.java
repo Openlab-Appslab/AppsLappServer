@@ -82,29 +82,29 @@ public class LabController {
         var exercise = new Exercise();
 
         try {
-            exercise = exerciseService.getExerciseByName(body.getExercise().getName());
-        } catch (ExerciseNotFoundException ignored) {
+            try {
+                exercise = exerciseService.getExercise(body.getId());
+            } catch (Exception ignored) {
 
-        }
-
-        exercise.setDescription(body.getExercise().getDescription());
-        exercise.setName(body.getExercise().getName());
-        exercise.setRequiredStars(body.getExercise().getRequiredStars());
-
-        try {
+            }
             var group = groupOfExercisesService.getGroupOfExercisesByName(
                     body.getExercise().getGroupName());
-            if (group.getExercises().contains(exercise)) {
-                group.getExercises().remove(exercise);
-                group.getExercises().add(exercise);
-            } else {
-                group.getExercises().add(exercise);
-            }
+
+            group.getExercises().remove(exercise);
+            exercise.setDescription(body.getExercise().getDescription());
+            exercise.setName(body.getExercise().getName());
+            exercise.setRequiredStars(body.getExercise().getRequiredStars());
+            group.getExercises().add(exercise);
             exercise.setGroupOfExercises(group);
             return exerciseService.save(exercise);
-        } catch (GroupOfExercisesNotFoundException ignored) {
+        } catch (Exception ignored) {
             var group = new GroupOfExercises();
             group.setName(body.getExercise().getGroupName());
+
+            exercise.setDescription(body.getExercise().getDescription());
+            exercise.setName(body.getExercise().getName());
+            exercise.setRequiredStars(body.getExercise().getRequiredStars());
+
             group.setExercises(List.of(exercise));
             group.setMinStars(body.getMinStars());
             group.setMaxStars(body.getMaxStars());

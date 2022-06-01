@@ -10,4 +10,5 @@ public class ExerciseWithGroupHelper {
     private ExerciseDto exercise;
     private int minStars;
     private int maxStars;
+    private long id;
 }
