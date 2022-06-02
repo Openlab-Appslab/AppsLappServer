@@ -39,6 +39,6 @@ public class ExerciseService {
     }
 
     public void deleteExercise(String exerciseName) {
-        exerciseRepository.deleteByName(exerciseName);
+        exerciseRepository.findByName(exerciseName).ifPresent(exerciseRepository::delete);
     }
 }
