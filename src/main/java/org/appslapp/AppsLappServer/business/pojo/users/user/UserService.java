@@ -200,7 +200,7 @@ public class UserService implements EntityService<User> {
 
         content = content.replace("[[name]]", user.getUsername());
 
-        String verifyURL = "https://appslappapp.vercel.app/resetPassword/" + user.getUsername();
+        String verifyURL = "https://appslappapp.vercel.app/reset-password/" + user.getUsername();
 
         content = content.replace("[[URL]]", verifyURL);
 
