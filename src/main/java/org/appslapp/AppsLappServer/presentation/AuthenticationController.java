@@ -1,5 +1,6 @@
 package org.appslapp.AppsLappServer.presentation;
 
+import org.appslapp.AppsLappServer.business.helper.ResetPasswordHelper;
 import org.appslapp.AppsLappServer.business.pojo.users.admin.AdminService;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
@@ -26,6 +27,11 @@ public class AuthenticationController {
         this.userService = userService;
         this.adminService = adminService;
         this.labmasterService = labmasterService;
+    }
+
+    @PostMapping("resetPassword")
+    public long resetPassword(@RequestBody ResetPasswordHelper body) {
+        return userService.resetPassword(body.getUsername(), body.getPassword());
     }
 
     @PostMapping("register")

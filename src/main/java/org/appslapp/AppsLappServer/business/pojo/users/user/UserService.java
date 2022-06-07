@@ -171,4 +171,11 @@ public class UserService implements EntityService<User> {
         }
         return user.get();
     }
+
+    public long resetPassword(String username, String password) {
+        var user = getUserByName(username);
+        user.setPassword(encoder.encode(password));
+        userRepository.save(user);
+        return user.getId();
+    }
 }
