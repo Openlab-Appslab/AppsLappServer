@@ -178,4 +178,35 @@ public class UserService implements EntityService<User> {
         userRepository.save(user);
         return user.getId();
     }
+
+    public long resetPasswordEmail(String username) throws MessagingException, UnsupportedEncodingException {
+        var user = getUserByName(username);
+        String toAddress = user.getEmail();
+        String fromAddress = "appslappmanagement@gmail.com";
+        String senderName = "AppsLapp";
+        String subject = "Potvrdte registraciu";
+        String content = "Dear [[name]],<br>"
+                + "Reset your fcking passowrd<br>"
+                + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
+                + "Thank you,<br>"
+                + "AppsLapp.";
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom(fromAddress, senderName);
+        helper.setTo(toAddress);
+        helper.setSubject(subject);
+
+        content = content.replace("[[name]]", user.getUsername());
+
+        String verifyURL = "https://appslappapp.vercel.app/resetPassword/" + user.getUsername();
+
+        content = content.replace("[[URL]]", verifyURL);
+
+        helper.setText(content, true);
+
+        mailSender.send(message);
+        return 1L;
+    }
 }

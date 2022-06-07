@@ -9,9 +9,12 @@ import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 
 @RestController
@@ -29,9 +32,19 @@ public class AuthenticationController {
         this.labmasterService = labmasterService;
     }
 
+    @PostMapping("resetPassword/{username}")
+    public long resetPassword(@PathVariable String username) {
+        try {
+            return userService.resetPasswordEmail(username);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     @PostMapping("resetPassword")
-    public long resetPassword(@RequestBody ResetPasswordHelper body) {
-        return userService.resetPassword(body.getUsername(), body.getPassword());
+    public long resetPassword(@Valid @RequestBody ResetPasswordHelper resetPasswordHelper) {
+        return userService.resetPassword(resetPasswordHelper.getUsername(), resetPasswordHelper.getPassword());
     }
 
     @PostMapping("register")
