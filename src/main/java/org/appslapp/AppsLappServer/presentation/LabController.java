@@ -6,6 +6,7 @@ import org.appslapp.AppsLappServer.business.helper.ExerciseUpdateHelper;
 import org.appslapp.AppsLappServer.business.helper.GroupOfExercisesToLabHelper;
 import org.appslapp.AppsLappServer.business.helper.ExerciseWithGroupHelper;
 import org.appslapp.AppsLappServer.business.mappers.ExerciseMapper;
+import org.appslapp.AppsLappServer.business.pojo.IsDoneExercise.IsDoneExercise;
 import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
 import org.appslapp.AppsLappServer.business.pojo.exercise.ExerciseService;
 import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
@@ -153,8 +154,13 @@ public class LabController {
      public Long updateScore(@RequestBody ExerciseUpdateHelper body) {
         var user = userService.getUserById(body.getStudentId());
         user.setScore(user.getScore() + body.getScore());
-        user.getFinishedExercises().add(body.getExerciseName());
         userService.update(user);
+        if (!body.isDone())
+            return 1L;
+
+        var exercise = exerciseService.getExerciseByName(body.getExerciseName());
+        exercise.getIsDoneExercises().add(new IsDoneExercise(true, user.getUsername()));
+        exerciseService.save(exercise);
         return 1L;
      }
 

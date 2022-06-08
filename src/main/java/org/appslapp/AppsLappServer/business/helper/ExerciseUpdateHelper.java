@@ -9,4 +9,5 @@ public class ExerciseUpdateHelper {
     private Long studentId;
     private String exerciseName;
     private int score;
+    private boolean isDone;
 }
