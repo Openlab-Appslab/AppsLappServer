@@ -160,7 +160,7 @@ public class LabController {
         userService.update(user);
 
         if (!body.isDone())
-            return 1L;
+            return 0L;
 
         var exercise = exerciseService.getExerciseByName(body.getExerciseName());
         exercise.getIsDoneExercises().add(new IsDoneExercise(true, user.getUsername()));
