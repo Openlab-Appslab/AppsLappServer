@@ -25,7 +25,6 @@ public class Exercise {
     private String name;
 
     @NotBlank
-    @Column(columnDefinition = "LONGTEXT")
     private String description;
 
     @Min(value = 0)
