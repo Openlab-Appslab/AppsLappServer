@@ -125,8 +125,8 @@ public class LabController {
     }
 
     @GetMapping("getExercise/{exerciseName}")
-    public Exercise getExercise(@PathVariable String exerciseName) {
-        return exerciseService.getExerciseByName(exerciseName);
+    public ExerciseDto getExercise(@PathVariable String exerciseName) {
+        return ExerciseMapper.map(exerciseService.getExerciseByName(exerciseName));
     }
 
     @PostMapping("createGroupOfExercises")
@@ -155,6 +155,7 @@ public class LabController {
         var user = userService.getUserById(body.getStudentId());
         user.setScore(user.getScore() + body.getScore());
         userService.update(user);
+
         if (!body.isDone())
             return 1L;
 
