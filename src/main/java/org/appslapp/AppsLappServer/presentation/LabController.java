@@ -159,9 +159,6 @@ public class LabController {
         user.setScore(user.getScore() + body.getScore());
         userService.update(user);
 
-        if (!body.isDone())
-            return 0L;
-
         var exercise = exerciseService.getExerciseByName(body.getExerciseName());
         exercise.getIsDoneExercises().add(new IsDoneExercise(true, user.getUsername()));
         exerciseService.save(exercise);
