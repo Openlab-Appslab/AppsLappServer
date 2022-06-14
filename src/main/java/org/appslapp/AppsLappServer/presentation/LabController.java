@@ -18,10 +18,8 @@ import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterServic
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;
-import org.appslapp.AppsLappServer.exceptions.ExerciseNotFoundException;
-import org.appslapp.AppsLappServer.exceptions.GroupOfExercisesNotFoundException;
+import org.appslapp.AppsLappServer.persistance.IsDoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,17 +36,19 @@ public class LabController {
     private final ExerciseService exerciseService;
     private final GroupOfExercisesService groupOfExercisesService;
     private final LabmasterService labmasterService;
+    private final IsDoneRepository isDoneRepository;
 
     @Autowired
     public LabController(UserService userService, LabService labService,
                          ExerciseService exerciseService,
                          GroupOfExercisesService groupOfExercisesService,
-                         LabmasterService labmasterService) {
+                         LabmasterService labmasterService, IsDoneRepository isDoneRepository) {
         this.userService = userService;
         this.labService = labService;
         this.exerciseService = exerciseService;
         this.groupOfExercisesService = groupOfExercisesService;
         this.labmasterService = labmasterService;
+        this.isDoneRepository = isDoneRepository;
     }
 
     @GetMapping("getStudents")
@@ -160,7 +160,9 @@ public class LabController {
         userService.update(user);
 
         var exercise = exerciseService.getExerciseByName(body.getExerciseName());
-        exercise.getIsDoneExercises().add(new IsDoneExercise(true, user.getUsername()));
+        var isDone = new IsDoneExercise(true, user.getUsername());
+        isDoneRepository.save(isDone);
+        exercise.getIsDoneExercises().add(isDone);
         exerciseService.save(exercise);
         return 1L;
      }
