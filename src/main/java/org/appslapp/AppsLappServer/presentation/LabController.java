@@ -92,10 +92,13 @@ public class LabController {
                     body.getExercise().getGroupName());
 
             group.getExercises().remove(exercise);
+
             exercise.setDescription(body.getExercise().getDescription());
             exercise.setName(body.getExercise().getName());
             exercise.setRequiredStars(body.getExercise().getRequiredStars());
+
             group.getExercises().add(exercise);
+
             exercise.setGroupOfExercises(group);
             return exerciseService.save(exercise);
         } catch (Exception ignored) {

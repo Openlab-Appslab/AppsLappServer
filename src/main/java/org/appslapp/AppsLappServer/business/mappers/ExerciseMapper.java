@@ -10,6 +10,7 @@ public class ExerciseMapper {
         exerciseDto.setDescription(exercise.getDescription());
         exerciseDto.setRequiredStars(exercise.getRequiredStars());
         exerciseDto.setGroupName(exercise.getGroupOfExercises().getName());
+        exerciseDto.setId(exercise.getId());
         return exerciseDto;
     }
 }
