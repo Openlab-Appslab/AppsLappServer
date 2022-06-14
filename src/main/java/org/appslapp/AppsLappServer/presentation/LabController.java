@@ -1,11 +1,14 @@
 package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.Dto.ExerciseDto;
+import org.appslapp.AppsLappServer.business.Dto.StudentDto;
 import org.appslapp.AppsLappServer.business.helper.CreateLabHelper;
 import org.appslapp.AppsLappServer.business.helper.ExerciseUpdateHelper;
 import org.appslapp.AppsLappServer.business.helper.GroupOfExercisesToLabHelper;
 import org.appslapp.AppsLappServer.business.helper.ExerciseWithGroupHelper;
 import org.appslapp.AppsLappServer.business.mappers.ExerciseMapper;
+import org.appslapp.AppsLappServer.business.mappers.ExerciseStudentMapper;
+import org.appslapp.AppsLappServer.business.mappers.StudentMapper;
 import org.appslapp.AppsLappServer.business.pojo.IsDoneExercise.IsDoneExercise;
 import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
 import org.appslapp.AppsLappServer.business.pojo.exercise.ExerciseService;
@@ -149,8 +152,9 @@ public class LabController {
     }
 
     @GetMapping("getStudent/{studentId}")
-    public User getStudent(@PathVariable Long studentId) {
-        return userService.getUserById(studentId);
+    public StudentDto getStudent(@PathVariable Long studentId) {
+        var student = userService.getUserById(studentId);
+        return StudentMapper.map(student);
     }
 
      @PostMapping("updateScore")

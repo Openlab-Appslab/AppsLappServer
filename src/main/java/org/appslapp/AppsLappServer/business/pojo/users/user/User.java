@@ -24,10 +24,6 @@ public class User extends org.appslapp.AppsLappServer.business.pojo.users.entity
 
     private int score;
 
-    @ElementCollection
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<String> finishedExercises;
-
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "lab_id")
