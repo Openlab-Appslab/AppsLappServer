@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ExerciseStudentDto {
-    private boolean isDone;
+    private boolean done;
     String name;
     String description;
     int requiredStars;

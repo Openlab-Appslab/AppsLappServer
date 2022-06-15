@@ -12,7 +12,7 @@ public class StudentMapper {
         studentDto.setExercises(new ArrayList<>());
         for (var i : student.getLab().getGroupOfExercises()) {
             for (var j : i.getExercises()) {
-                studentDto.getExercises().add(ExerciseStudentMapper.map(j));
+                studentDto.getExercises().add(ExerciseStudentMapper.map(j, student.getUsername()));
             }
         }
         studentDto.setId(student.getId());
