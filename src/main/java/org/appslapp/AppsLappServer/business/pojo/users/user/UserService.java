@@ -835,7 +835,6 @@ public class UserService implements EntityService<User> {
                 "style=\"width:100%;padding-right:0px;padding-left:0px;padding-top:5px;padding-bottom:5px;\">\n" +
                 "<div align=\"center\" style=\"line-height:10px\"><h1\n" +
                 "style=\"margin: 0; color: #03191e; direction: ltr; font-family: 'Dosis', sans-serif !important; font-size: 40px; font-weight: normal; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;\">\n" +
-                "<strong>AppsLapp</strong></h1></div>\n" +
                 "</td>\n" +
                 "</tr>\n" +
                 "</table>\n" +
