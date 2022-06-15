@@ -7,9 +7,11 @@ public class StudentMapper {
     public static StudentDto map(User student) {
         StudentDto studentDto = new StudentDto();
         studentDto.setName(student.getUsername());
-        studentDto.setExercises(student.getLab().getGroupOfExercises().stream().
-                flatMap(group -> group.getExercises().stream().map(ExerciseStudentMapper::map)).
-                collect(java.util.stream.Collectors.toList()));
+        for (var i : student.getLab().getGroupOfExercises()) {
+            for (var j : i.getExercises()) {
+                studentDto.getExercises().add(ExerciseStudentMapper.map(j));
+            }
+        }
         studentDto.setId(student.getId());
         return studentDto;
     }
