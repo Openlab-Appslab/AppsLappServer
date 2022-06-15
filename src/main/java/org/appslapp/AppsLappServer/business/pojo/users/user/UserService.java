@@ -641,7 +641,7 @@ public class UserService implements EntityService<User> {
         String toAddress = user.getEmail();
         String fromAddress = "appslappmanagement@gmail.com";
         String senderName = "AppsLapp";
-        String subject = "Potvrdte registraciu";
+        String subject = "Resetovanie hesla";
         String content = "<!DOCTYPE html>\n" +
                 "\n" +
                 "<html lang=\"en\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:v=\"urn:schemas-microsoft-com:vml\">\n" +
