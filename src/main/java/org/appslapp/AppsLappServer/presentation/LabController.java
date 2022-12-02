@@ -7,9 +7,7 @@ import org.appslapp.AppsLappServer.business.helper.ExerciseUpdateHelper;
 import org.appslapp.AppsLappServer.business.helper.GroupOfExercisesToLabHelper;
 import org.appslapp.AppsLappServer.business.helper.ExerciseWithGroupHelper;
 import org.appslapp.AppsLappServer.business.mappers.ExerciseMapper;
-import org.appslapp.AppsLappServer.business.mappers.ExerciseStudentMapper;
 import org.appslapp.AppsLappServer.business.mappers.StudentMapper;
-import org.appslapp.AppsLappServer.business.pojo.IsDoneExercise.IsDoneExercise;
 import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
 import org.appslapp.AppsLappServer.business.pojo.exercise.ExerciseService;
 import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
@@ -21,7 +19,6 @@ import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterServic
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;
-import org.appslapp.AppsLappServer.persistance.IsDoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -39,19 +36,17 @@ public class LabController {
     private final ExerciseService exerciseService;
     private final GroupOfExercisesService groupOfExercisesService;
     private final LabmasterService labmasterService;
-    private final IsDoneRepository isDoneRepository;
 
     @Autowired
     public LabController(UserService userService, LabService labService,
                          ExerciseService exerciseService,
                          GroupOfExercisesService groupOfExercisesService,
-                         LabmasterService labmasterService, IsDoneRepository isDoneRepository) {
+                         LabmasterService labmasterService) {
         this.userService = userService;
         this.labService = labService;
         this.exerciseService = exerciseService;
         this.groupOfExercisesService = groupOfExercisesService;
         this.labmasterService = labmasterService;
-        this.isDoneRepository = isDoneRepository;
     }
 
     @GetMapping("getStudents")
@@ -161,13 +156,10 @@ public class LabController {
      public Long updateScore(@RequestBody ExerciseUpdateHelper body) {
         var user = userService.getUserById(body.getStudentId());
         user.setScore(user.getScore() + body.getScore());
-        userService.update(user);
 
         var exercise = exerciseService.getExerciseByName(body.getExerciseName());
-        var isDone = new IsDoneExercise(true, user.getUsername());
-        isDoneRepository.save(isDone);
-        exercise.getIsDoneExercises().add(isDone);
-        exerciseService.save(exercise);
+        user.getDoneExercises().add(exercise);
+        userService.update(user);
         return 1L;
      }
 

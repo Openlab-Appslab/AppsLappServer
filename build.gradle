@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "com.microsoft.azure.azurewebapp" version "1.2.0"
 }
 
 group = 'org.appslapp'
@@ -26,6 +27,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
+	implementation 'org.hibernate:hibernate-entitymanager'
+	implementation 'org.hibernate:hibernate-core'
+	implementation 'javax.xml.bind:jaxb-api'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -36,3 +41,27 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+azurewebapp {
+	subscription = '54a295ef-64c6-451a-9ccd-ad3c4fd70b36'
+	resourceGroup = 'spsit-notes-rg'
+	appName = 'spsit-notes-be'
+	pricingTier = 'F1'
+	region = 'centralus'
+	runtime {
+		os = 'Linux'
+		webContainer = 'Java SE'
+		javaVersion = 'Java 17'
+	}
+	appSettings {
+		MYSQL_URL = 'jdbc:sqlserver://spsit-notes.database.windows.net:1433;database=notes;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;'
+		MYSQL_USER = 'manazer@spsit-notes'
+		MYSQL_PASSWORD = 'S0v1kj3g3j'
+		EMAIL_USERNAME = 'appslappmanagement@gmail.com'
+		EMAIL_PASSWORD = 'knzvcjymrjulqzci'
+	}
+	auth {
+		type = 'oauth2'
+	}
+}
+
