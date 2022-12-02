@@ -28,10 +28,15 @@ logging:
   level:
     org:
       springframework:
-        web: ERROR
+        web: DEBUG
       hibernate: ERROR
-    root: ERROR
+    root: DEBUG
 
 
 server:
-  port : ${PORT:8081}
+  port : ${PORT:8080}
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
+    include-exception: true
