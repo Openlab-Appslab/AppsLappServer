@@ -50,6 +50,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/auth/resetPassword").permitAll()
                 .mvcMatchers("/api/auth/login").authenticated()
                 .mvcMatchers("/api/user/get").authenticated()
+                .mvcMatchers("/api/auth/createAdmins").permitAll()
                 .mvcMatchers("/api/management/**").hasAnyAuthority("LABMASTER")
                 .anyRequest().denyAll()
                 .and()
