@@ -66,7 +66,7 @@ public class AuthenticationController {
     public ResponseEntity<Void> verifyEmail(@PathVariable String code) {
         userService.verifyUser(code);
         return ResponseEntity.status(HttpStatus.PERMANENT_REDIRECT ).location(
-                URI.create("https://apps-lapp-web.vercel.app/emailV")).build();
+                URI.create("https://appslappapp.vercel.app/emailV")).build();
     }
 
     @PostMapping("promoteToLabmaster")
