@@ -23,6 +23,10 @@ public class GroupOfExercises {
     @NotBlank
     private String name;
 
+    private String award;
+
+    private String deadline;
+
     private int minStars;
 
     private int maxStars;

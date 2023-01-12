@@ -86,6 +86,7 @@ public class LabController {
             } catch (Exception ignored) {
 
             }
+
             var group = groupOfExercisesService.getGroupOfExercisesByName(
                     body.getExercise().getGroupName());
 
