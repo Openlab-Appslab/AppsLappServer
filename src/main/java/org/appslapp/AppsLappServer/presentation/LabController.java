@@ -111,6 +111,8 @@ public class LabController {
             group.setExercises(List.of(exercise));
             group.setMinStars(body.getMinStars());
             group.setMaxStars(body.getMaxStars());
+            group.setAward(body.getAward());
+            group.setDeadline(body.getDeadline());
             exercise.setGroupOfExercises(group);
             return exerciseService.save(exercise, groupOfExercisesService);
         }

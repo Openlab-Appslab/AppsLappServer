@@ -11,4 +11,8 @@ public class ExerciseWithGroupHelper {
     private int minStars;
     private int maxStars;
     private long id;
+
+    private String award;
+
+    private String deadline;
 }
