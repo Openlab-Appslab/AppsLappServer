@@ -9,5 +9,4 @@ import java.util.List;
 @Setter
 public class GroupOfExercisesToLabHelper {
     private List<String> groupsOfExercises;
-    private Long labId;
 }

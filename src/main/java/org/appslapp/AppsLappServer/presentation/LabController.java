@@ -1,15 +1,7 @@
 package org.appslapp.AppsLappServer.presentation;
 
-import org.appslapp.AppsLappServer.business.Dto.ExerciseDto;
-import org.appslapp.AppsLappServer.business.Dto.StudentDto;
 import org.appslapp.AppsLappServer.business.helper.CreateLabHelper;
-import org.appslapp.AppsLappServer.business.helper.ExerciseUpdateHelper;
 import org.appslapp.AppsLappServer.business.helper.GroupOfExercisesToLabHelper;
-import org.appslapp.AppsLappServer.business.helper.ExerciseWithGroupHelper;
-import org.appslapp.AppsLappServer.business.mappers.ExerciseMapper;
-import org.appslapp.AppsLappServer.business.mappers.StudentMapper;
-import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
-import org.appslapp.AppsLappServer.business.pojo.exercise.ExerciseService;
 import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
 import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercisesService;
 import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
@@ -28,33 +20,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/management/")
+@RequestMapping("/api/lab/")
 public class LabController {
 
     private final UserService userService;
     private final LabService labService;
-    private final ExerciseService exerciseService;
     private final GroupOfExercisesService groupOfExercisesService;
     private final LabmasterService labmasterService;
 
     @Autowired
     public LabController(UserService userService, LabService labService,
-                         ExerciseService exerciseService,
                          GroupOfExercisesService groupOfExercisesService,
                          LabmasterService labmasterService) {
         this.userService = userService;
         this.labService = labService;
-        this.exerciseService = exerciseService;
         this.groupOfExercisesService = groupOfExercisesService;
         this.labmasterService = labmasterService;
     }
 
-    @GetMapping("getStudents")
-    public List<String> getUsers() {
-        return userService.getStudents();
-    }
-
-    @PostMapping("createLab")
+    @PostMapping
     public long createLab(@RequestBody CreateLabHelper body,
                           @AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
         var lab = new Lab();
@@ -66,61 +50,14 @@ public class LabController {
         return labService.createLab(lab, labmasterService, user.getUsername());
     }
 
-    @GetMapping("getLabs")
+    @GetMapping("labmaster")
     public List<Lab> getLab(@AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
         return user.getUser().getLabs();
     }
 
-    @GetMapping("getLab/{labId}")
+    @GetMapping("{labId}")
     public Lab getLab(@PathVariable long labId) {
         return labService.getLab(labId);
-    }
-
-    @PostMapping("createExercise")
-    public Long createExercise(@RequestBody ExerciseWithGroupHelper body) {
-        var exercise = new Exercise();
-
-        try {
-            try {
-                exercise = exerciseService.getExercise(body.getId());
-            } catch (Exception ignored) {
-
-            }
-
-            var group = groupOfExercisesService.getGroupOfExercisesByName(
-                    body.getExercise().getGroupName());
-
-            group.getExercises().remove(exercise);
-
-            exercise.setDescription(body.getExercise().getDescription());
-            exercise.setName(body.getExercise().getName());
-            exercise.setRequiredStars(body.getExercise().getRequiredStars());
-
-            group.getExercises().add(exercise);
-
-            exercise.setGroupOfExercises(group);
-            return exerciseService.save(exercise);
-        } catch (Exception ignored) {
-            var group = new GroupOfExercises();
-            group.setName(body.getExercise().getGroupName());
-
-            exercise.setDescription(body.getExercise().getDescription());
-            exercise.setName(body.getExercise().getName());
-            exercise.setRequiredStars(body.getExercise().getRequiredStars());
-
-            group.setExercises(List.of(exercise));
-            group.setMinStars(body.getMinStars());
-            group.setMaxStars(body.getMaxStars());
-            group.setAward(body.getAward());
-            group.setDeadline(body.getDeadline());
-            exercise.setGroupOfExercises(group);
-            return exerciseService.save(exercise, groupOfExercisesService);
-        }
-    }
-
-    @GetMapping("getAllExercises")
-    public List<ExerciseDto> getAllExercises() {;
-        return exerciseService.getAllExercises().stream().map(ExerciseMapper::map).collect(Collectors.toList());
     }
 
     @GetMapping("getAllGroups")
@@ -128,19 +65,14 @@ public class LabController {
         return groupOfExercisesService.findAll();
     }
 
-    @GetMapping("getExercise/{exerciseName}")
-    public ExerciseDto getExercise(@PathVariable String exerciseName) {
-        return ExerciseMapper.map(exerciseService.getExerciseByName(exerciseName));
-    }
-
     @PostMapping("createGroupOfExercises")
     public Long createGroupOfExercises(@Valid @RequestBody GroupOfExercises groupOfExercises) {
         return groupOfExercisesService.save(groupOfExercises);
     }
 
-    @PostMapping("addGroupToLab")
-    public Long addExerciseToLab(@RequestBody GroupOfExercisesToLabHelper body){
-        var lab = labService.getLab(body.getLabId());
+    @PostMapping("{labId}/addGroup")
+    public Long addExerciseToLab(@PathVariable long labId, @RequestBody GroupOfExercisesToLabHelper body){
+        var lab = labService.getLab(labId);
         var groups = body.getGroupsOfExercises().stream()
                 .map(groupOfExercisesService::getGroupOfExercisesByName)
                 .collect(Collectors.toList());
@@ -149,30 +81,7 @@ public class LabController {
         return 1L;
     }
 
-    @GetMapping("getStudent/{studentId}")
-    public StudentDto getStudent(@PathVariable Long studentId) {
-        var student = userService.getUserById(studentId);
-        return StudentMapper.map(student);
-    }
-
-     @PostMapping("updateScore")
-     public Long updateScore(@RequestBody ExerciseUpdateHelper body) {
-        var user = userService.getUserById(body.getStudentId());
-        user.setScore(user.getScore() + body.getScore());
-
-        var exercise = exerciseService.getExerciseByName(body.getExerciseName());
-        user.getDoneExercises().add(exercise);
-        userService.update(user);
-        return 1L;
-     }
-
-     @DeleteMapping("deleteExercise/{exerciseName}")
-     public Long deleteExercise(@PathVariable String exerciseName) {
-        exerciseService.deleteExercise(exerciseName);
-        return 1L;
-     }
-
-     @GetMapping("getLab")
+     @GetMapping
      public Lab getLab(@AuthenticationPrincipal User user) {
         return user.getLab();
      }

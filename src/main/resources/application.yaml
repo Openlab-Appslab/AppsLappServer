@@ -5,6 +5,7 @@ spring:
     password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
+
   mvc:
     log-request-details: true
 
@@ -28,10 +29,9 @@ logging:
   level:
     org:
       springframework:
-        web: DEBUG
+        web: INFO
       hibernate: ERROR
-    root: DEBUG
-
+    root: INFO
 
 server:
   port : ${PORT:8080}
@@ -40,3 +40,9 @@ server:
     include-binding-errors: always
     include-stacktrace: always
     include-exception: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: openapi, swagger-ui
