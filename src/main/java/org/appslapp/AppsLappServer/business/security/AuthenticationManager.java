@@ -1,8 +1,8 @@
 package org.appslapp.AppsLappServer.business.security;
 
-import org.appslapp.AppsLappServer.business.pojo.users.admin.AdminService;
-import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
-import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
+import org.appslapp.AppsLappServer.business.services.AdminService;
+import org.appslapp.AppsLappServer.business.services.LabmasterService;
+import org.appslapp.AppsLappServer.business.services.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsServiceImp;
 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

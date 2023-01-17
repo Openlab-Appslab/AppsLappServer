@@ -1,10 +1,10 @@
-package org.appslapp.AppsLappServer.business.pojo.lab;
+package org.appslapp.AppsLappServer.business.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
+import org.appslapp.AppsLappServer.business.pojo.GroupOfExercises;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.hibernate.annotations.Fetch;

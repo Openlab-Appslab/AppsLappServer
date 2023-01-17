@@ -1,6 +1,6 @@
-package org.appslapp.AppsLappServer.business.pojo.exercise;
+package org.appslapp.AppsLappServer.business.services;
 
-import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercisesService;
+import org.appslapp.AppsLappServer.business.pojo.Exercise;
 import org.appslapp.AppsLappServer.exceptions.ExerciseNotFoundException;
 import org.appslapp.AppsLappServer.persistance.ExerciseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +11,17 @@ import java.util.List;
 @Service
 public class ExerciseService {
     private final ExerciseRepository exerciseRepository;
+    private final GroupOfExercisesService service;
 
     @Autowired
-    public ExerciseService(ExerciseRepository exerciseRepository) {
+    public ExerciseService(ExerciseRepository exerciseRepository, GroupOfExercisesService service) {
         this.exerciseRepository = exerciseRepository;
+        this.service = service;
     }
 
-    public long save(Exercise exercise, GroupOfExercisesService service) {
-        service.save(exercise.getGroupOfExercises());
-        return exerciseRepository.save(exercise).getId();
-    }
-
-    public long save(Exercise exercise) {
+    public long save(Exercise exercise, boolean isUpdate) {
+        if (isUpdate)
+            service.save(exercise.getGroupOfExercises());
         return exerciseRepository.save(exercise).getId();
     }
 

@@ -1,6 +1,7 @@
-package org.appslapp.AppsLappServer.business.pojo.users.labmaster;
+package org.appslapp.AppsLappServer.business.services;
 
 import org.appslapp.AppsLappServer.business.pojo.users.entity.EntityService;
+import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.exceptions.UserNotFoundException;
 import org.appslapp.AppsLappServer.persistance.users.LabmasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;

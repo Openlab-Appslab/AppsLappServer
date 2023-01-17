@@ -1,5 +1,6 @@
-package org.appslapp.AppsLappServer.business.pojo.users.admin;
+package org.appslapp.AppsLappServer.business.services;
 
+import org.appslapp.AppsLappServer.business.pojo.users.admin.Admin;
 import org.appslapp.AppsLappServer.business.pojo.users.entity.EntityService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.exceptions.UserNotFoundException;

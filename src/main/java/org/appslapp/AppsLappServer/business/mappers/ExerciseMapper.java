@@ -1,7 +1,7 @@
 package org.appslapp.AppsLappServer.business.mappers;
 
 import org.appslapp.AppsLappServer.business.Dto.ExerciseDto;
-import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
+import org.appslapp.AppsLappServer.business.pojo.Exercise;
 
 public class ExerciseMapper {
     public static ExerciseDto map(Exercise exercise) {

@@ -2,14 +2,14 @@ package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.helper.CreateLabHelper;
 import org.appslapp.AppsLappServer.business.helper.GroupOfExercisesToLabHelper;
-import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
-import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercisesService;
-import org.appslapp.AppsLappServer.business.pojo.lab.Lab;
-import org.appslapp.AppsLappServer.business.pojo.lab.LabService;
+import org.appslapp.AppsLappServer.business.pojo.GroupOfExercises;
+import org.appslapp.AppsLappServer.business.services.GroupOfExercisesService;
+import org.appslapp.AppsLappServer.business.pojo.Lab;
+import org.appslapp.AppsLappServer.business.services.LabService;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
-import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
+import org.appslapp.AppsLappServer.business.services.LabmasterService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
-import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
+import org.appslapp.AppsLappServer.business.services.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,16 +26,13 @@ public class LabController {
     private final UserService userService;
     private final LabService labService;
     private final GroupOfExercisesService groupOfExercisesService;
-    private final LabmasterService labmasterService;
 
     @Autowired
     public LabController(UserService userService, LabService labService,
-                         GroupOfExercisesService groupOfExercisesService,
-                         LabmasterService labmasterService) {
+                         GroupOfExercisesService groupOfExercisesService) {
         this.userService = userService;
         this.labService = labService;
         this.groupOfExercisesService = groupOfExercisesService;
-        this.labmasterService = labmasterService;
     }
 
     @PostMapping
@@ -47,7 +44,7 @@ public class LabController {
                 .map(userService::getUserByFullName)
                 .collect(Collectors.toList()));
         
-        return labService.createLab(lab, labmasterService, user.getUsername());
+        return labService.createLab(lab, user.getUsername());
     }
 
     @GetMapping("labmaster")

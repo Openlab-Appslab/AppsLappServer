@@ -1,6 +1,6 @@
-package org.appslapp.AppsLappServer.business.pojo.lab;
+package org.appslapp.AppsLappServer.business.services;
 
-import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
+import org.appslapp.AppsLappServer.business.pojo.Lab;
 import org.appslapp.AppsLappServer.exceptions.LabNotFoundException;
 import org.appslapp.AppsLappServer.persistance.LabRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +11,22 @@ import java.util.Optional;
 @Service
 public class LabService {
     private final LabRepository labRepository;
+    private final LabmasterService service;
 
     @Autowired
-    public LabService(LabRepository labRepository) {
+    public LabService(LabRepository labRepository, LabmasterService service) {
         this.labRepository = labRepository;
+        this.service = service;
     }
 
     public long save(Lab lab) {
         return labRepository.save(lab).getId();
     }
 
-    public long createLab(Lab lab, LabmasterService labmasterService, String username) {
-        var labmaster = labmasterService.getUserByName(username);
+    public long createLab(Lab lab, String username) {
+        var labmaster = service.getUserByName(username);
         labmaster.getLabs().add(lab);
-        labmasterService.update(labmaster);
+        service.update(labmaster);
         lab.setLabmaster(labmaster);
         return save(lab);
     }

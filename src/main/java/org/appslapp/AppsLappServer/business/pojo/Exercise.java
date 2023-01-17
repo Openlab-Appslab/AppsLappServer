@@ -1,10 +1,9 @@
-package org.appslapp.AppsLappServer.business.pojo.exercise;
+package org.appslapp.AppsLappServer.business.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
 import org.hibernate.annotations.LazyCollection;
 
 import javax.persistence.*;

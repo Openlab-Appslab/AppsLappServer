@@ -4,11 +4,11 @@ import org.appslapp.AppsLappServer.business.Dto.ExerciseDto;
 import org.appslapp.AppsLappServer.business.helper.ExerciseUpdateHelper;
 import org.appslapp.AppsLappServer.business.helper.ExerciseWithGroupHelper;
 import org.appslapp.AppsLappServer.business.mappers.ExerciseMapper;
-import org.appslapp.AppsLappServer.business.pojo.exercise.Exercise;
-import org.appslapp.AppsLappServer.business.pojo.exercise.ExerciseService;
-import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercises;
-import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercisesService;
-import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
+import org.appslapp.AppsLappServer.business.pojo.Exercise;
+import org.appslapp.AppsLappServer.business.services.ExerciseService;
+import org.appslapp.AppsLappServer.business.pojo.GroupOfExercises;
+import org.appslapp.AppsLappServer.business.services.GroupOfExercisesService;
+import org.appslapp.AppsLappServer.business.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -81,7 +81,7 @@ public class ExerciseController {
             group.getExercises().add(exercise);
 
             exercise.setGroupOfExercises(group);
-            return exerciseService.save(exercise);
+            return exerciseService.save(exercise, false);
         } catch (Exception ignored) {
             var group = new GroupOfExercises();
             group.setName(body.getExercise().getGroupName());
@@ -96,7 +96,7 @@ public class ExerciseController {
             group.setAward(body.getAward());
             group.setDeadline(body.getDeadline());
             exercise.setGroupOfExercises(group);
-            return exerciseService.save(exercise, groupOfExercisesService);
+            return exerciseService.save(exercise, true);
         }
     }
 }

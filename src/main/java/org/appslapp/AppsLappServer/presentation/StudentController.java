@@ -2,11 +2,7 @@ package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.Dto.StudentDto;
 import org.appslapp.AppsLappServer.business.mappers.StudentMapper;
-import org.appslapp.AppsLappServer.business.pojo.exercise.ExerciseService;
-import org.appslapp.AppsLappServer.business.pojo.groupOfExercises.GroupOfExercisesService;
-import org.appslapp.AppsLappServer.business.pojo.lab.LabService;
-import org.appslapp.AppsLappServer.business.pojo.users.labmaster.LabmasterService;
-import org.appslapp.AppsLappServer.business.pojo.users.user.UserService;
+import org.appslapp.AppsLappServer.business.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
