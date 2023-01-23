@@ -10,17 +10,17 @@ public class StudentMapper {
         StudentDto studentDto = new StudentDto();
         studentDto.setName(student.getUsername());
         studentDto.setExercises(new ArrayList<>());
+        studentDto.setAwards(new ArrayList<>());
+
         var score = 0;
         for (var i : student.getLab().getGroupOfExercises()) {
             var done = 0;
             for (var j : i.getExercises()) {
                 var exercise = ExerciseStudentMapper.map(j, student);
-
                 if (exercise.isDone()) {
                     score += exercise.getRequiredStars();
                     done++;
                 }
-
                 studentDto.getExercises().add(exercise);
             }
 
