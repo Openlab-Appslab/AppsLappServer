@@ -1,5 +1,6 @@
 package org.appslapp.AppsLappServer.presentation;
 
+import org.appslapp.AppsLappServer.business.Dto.LabDto;
 import org.appslapp.AppsLappServer.business.helper.CreateLabHelper;
 import org.appslapp.AppsLappServer.business.helper.GroupOfExercisesToLabHelper;
 import org.appslapp.AppsLappServer.business.pojo.GroupOfExercises;
@@ -52,8 +53,8 @@ public class LabController {
     }
 
     @GetMapping("{labId}")
-    public Lab getLab(@PathVariable long labId) {
-        return labService.getLab(labId);
+    public LabDto getLab(@PathVariable long labId) {
+        return labService.getLabDto(labId);
     }
 
     @GetMapping("getAllGroups")
