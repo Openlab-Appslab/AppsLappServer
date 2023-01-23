@@ -7,7 +7,6 @@ import org.appslapp.AppsLappServer.business.services.GroupOfExercisesService;
 import org.appslapp.AppsLappServer.business.pojo.Lab;
 import org.appslapp.AppsLappServer.business.services.LabService;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
-import org.appslapp.AppsLappServer.business.services.LabmasterService;
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.business.services.UserService;
 import org.appslapp.AppsLappServer.business.security.users.entity.EntityDetailsImp;

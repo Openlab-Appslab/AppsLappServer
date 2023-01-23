@@ -10,12 +10,26 @@ public class StudentMapper {
         StudentDto studentDto = new StudentDto();
         studentDto.setName(student.getUsername());
         studentDto.setExercises(new ArrayList<>());
+        var score = 0;
         for (var i : student.getLab().getGroupOfExercises()) {
+            var done = 0;
             for (var j : i.getExercises()) {
-                studentDto.getExercises().add(ExerciseStudentMapper.map(j, student));
+                var exercise = ExerciseStudentMapper.map(j, student);
+
+                if (exercise.isDone()) {
+                    score += exercise.getRequiredStars();
+                    done++;
+                }
+
+                studentDto.getExercises().add(exercise);
+            }
+
+            if (done == i.getExercises().size()) {
+                studentDto.getAwards().add(i.getAward());
             }
         }
         studentDto.setId(student.getId());
+        studentDto.setScore(score);
         return studentDto;
     }
 }

@@ -11,5 +11,6 @@ public class StudentDto {
     private Long id;
     private String name;
     private int score;
+    private List<String> awards;
     private List<ExerciseStudentDto> exercises;
 }
