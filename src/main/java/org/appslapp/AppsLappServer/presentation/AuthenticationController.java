@@ -1,6 +1,7 @@
 package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.helper.ResetPasswordHelper;
+import org.appslapp.AppsLappServer.business.pojo.users.entity.Entity;
 import org.appslapp.AppsLappServer.business.services.AdminService;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
 import org.appslapp.AppsLappServer.business.services.LabmasterService;
@@ -9,6 +10,7 @@ import org.appslapp.AppsLappServer.business.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -52,8 +54,8 @@ public class AuthenticationController {
     }
 
     @GetMapping("login")
-    public long login() {
-        return 0;
+    public String login(@AuthenticationPrincipal Entity entity) {
+        return entity.getAuthority();
     }
 
     @PostMapping("resendEmail/{username}")
