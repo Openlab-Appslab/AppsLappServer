@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.appslapp.AppsLappServer.business.pojo.GroupOfExercises;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
-import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import java.util.List;
 
 @Getter
@@ -14,7 +13,7 @@ public class LabDto {
 
     private Labmaster labmaster;
 
-    private List<String> studentNames;
+    private List<StudentDtoNoScore> studentNames;
 
     private String name;
 

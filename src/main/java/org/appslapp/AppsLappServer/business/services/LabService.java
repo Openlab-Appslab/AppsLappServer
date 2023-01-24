@@ -1,6 +1,7 @@
 package org.appslapp.AppsLappServer.business.services;
 
 import org.appslapp.AppsLappServer.business.Dto.LabDto;
+import org.appslapp.AppsLappServer.business.Dto.StudentDtoNoScore;
 import org.appslapp.AppsLappServer.business.pojo.Lab;
 import org.appslapp.AppsLappServer.business.pojo.users.entity.Entity;
 import org.appslapp.AppsLappServer.exceptions.LabNotFoundException;
@@ -50,7 +51,11 @@ public class LabService {
         ret.setGroupOfExercises(l.getGroupOfExercises());
         ret.setId(l.getId());
         ret.setLabmaster(l.getLabmaster());
-        ret.setStudentNames(l.getStudentNames().stream().map(Entity::getUsername).collect(Collectors.toList()));
+        ret.setStudentNames(l.getStudentNames().stream().map(x -> {
+            var user = (Entity) x;
+            var r = new StudentDtoNoScore(user.getId(), user.getUsername());
+            return r;
+        }).collect(Collectors.toList()));
         return ret;
     }
 }
