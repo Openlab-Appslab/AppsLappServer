@@ -48,8 +48,13 @@ public class LabController {
     }
 
     @GetMapping("labmaster")
-    public List<Lab> getLab(@AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
+    public List<Lab> getLabLabmaster(@AuthenticationPrincipal EntityDetailsImp<Labmaster> user) {
         return user.getUser().getLabs();
+    }
+
+    @GetMapping("student")
+    public Lab getLabStudent(@AuthenticationPrincipal EntityDetailsImp<User> user) {
+        return user.getUser().getLab();
     }
 
     @GetMapping("{labId}")
