@@ -1,6 +1,7 @@
 package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.helper.ResetPasswordHelper;
+import org.appslapp.AppsLappServer.business.pojo.GroupOfExercises;
 import org.appslapp.AppsLappServer.business.pojo.users.entity.Entity;
 import org.appslapp.AppsLappServer.business.services.AdminService;
 import org.appslapp.AppsLappServer.business.pojo.users.labmaster.Labmaster;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,8 @@ import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.security.Principal;
+import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth/")
@@ -56,8 +60,8 @@ public class AuthenticationController {
     }
 
     @GetMapping("login")
-    public String login(Authentication principal) {
-        return principal.getAuthorities().toString();
+    public Collection<? extends GrantedAuthority> login(Authentication principal) {
+        return principal.getAuthorities();
     }
 
     @PostMapping("resendEmail/{username}")
