@@ -56,7 +56,7 @@ public class AuthenticationManager extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/user/get").authenticated()
                 .mvcMatchers("/api/lab/student/**").hasAnyAuthority("LABMASTER", "PUPIL")
                 .mvcMatchers("/api/lab/**").hasAnyAuthority("LABMASTER")
-                .mvcMatchers("/api/exercise/**").hasAnyAuthority("LABMASTER")
+                .mvcMatchers("/api/exercise/**").hasAnyAuthority("LABMASTER", "PUPIL")
                 .mvcMatchers("/api/student/**").hasAnyAuthority("LABMASTER")
                 .anyRequest().denyAll()
                 .and()
