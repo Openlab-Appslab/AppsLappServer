@@ -16,6 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,8 +54,10 @@ public class LabController {
     }
 
     @GetMapping("student")
-    public Lab getLabStudent(@AuthenticationPrincipal EntityDetailsImp<User> user) {
-        return user.getUser().getLab();
+    public List<Lab> getLabStudent(@AuthenticationPrincipal EntityDetailsImp<User> user) {
+        return new LinkedList<>() {{
+            add(user.getUser().getLab());
+        }};
     }
 
     @GetMapping("{labId}")
