@@ -1,6 +1,7 @@
 package org.appslapp.AppsLappServer.presentation;
 
 import org.appslapp.AppsLappServer.business.Dto.ExerciseDto;
+import org.appslapp.AppsLappServer.business.Dto.Hint;
 import org.appslapp.AppsLappServer.business.helper.ExerciseUpdateHelper;
 import org.appslapp.AppsLappServer.business.helper.ExerciseWithGroupHelper;
 import org.appslapp.AppsLappServer.business.mappers.ExerciseMapper;
@@ -59,9 +60,9 @@ public class ExerciseController {
     }
 
     @PostMapping("getHint/{id}")
-    public String getHint(@PathVariable Long id) {
+    public Hint getHint(@PathVariable Long id) {
         var exercise = exerciseService.getExercise(id);
-        return exercise.getHint();
+        return new Hint(exercise.getHint());
     }
 
     @PostMapping
