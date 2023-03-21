@@ -29,6 +29,8 @@ public class GroupOfExercises {
 
     private int maxStars;
 
+    private boolean enabled;
+
     @OneToMany(mappedBy = "groupOfExercises")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Exercise> exercises;

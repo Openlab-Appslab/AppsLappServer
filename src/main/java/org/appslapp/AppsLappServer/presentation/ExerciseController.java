@@ -58,6 +58,12 @@ public class ExerciseController {
         return 1L;
     }
 
+    @PostMapping("{id}/getHint")
+    public String getHint(@PathVariable Long id) {
+        var exercise = exerciseService.getExercise(id);
+        return exercise.getHint();
+    }
+
     @PostMapping
     public Long createExercise(@RequestBody ExerciseWithGroupHelper body) {
         var exercise = new Exercise();

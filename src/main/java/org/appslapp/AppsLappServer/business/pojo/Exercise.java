@@ -29,6 +29,10 @@ public class Exercise {
     @Min(value = 0)
     private int requiredStars;
 
+    private String hint;
+
+
+
     @ManyToOne
     @JoinColumn(name = "group_of_exercises_id")
     @LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)
