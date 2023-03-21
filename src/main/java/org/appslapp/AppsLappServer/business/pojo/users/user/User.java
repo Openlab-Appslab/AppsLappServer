@@ -1,7 +1,7 @@
 package org.appslapp.AppsLappServer.business.pojo.users.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +27,10 @@ public class User extends org.appslapp.AppsLappServer.business.pojo.users.entity
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Exercise> doneExercises;
+
+    @JsonIgnore
+    @ElementCollection
+    private List<Long> hintedExercises;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
