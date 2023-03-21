@@ -43,7 +43,7 @@ public class ExerciseController {
     }
 
     @GetMapping
-    public List<ExerciseDto> getAllExercises() {;
+    public List<ExerciseDto> getAllExercises() {
         return exerciseService.getAllExercises().stream().map(ExerciseMapper::map).collect(Collectors.toList());
     }
 
@@ -58,7 +58,7 @@ public class ExerciseController {
         return 1L;
     }
 
-    @PostMapping("{id}/getHint")
+    @PostMapping("getHint/{id}")
     public String getHint(@PathVariable Long id) {
         var exercise = exerciseService.getExercise(id);
         return exercise.getHint();
