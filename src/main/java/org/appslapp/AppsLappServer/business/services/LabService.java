@@ -53,7 +53,7 @@ public class LabService {
         ret.setLabmaster(l.getLabmaster());
         ret.setStudentNames(l.getStudentNames().stream().map(x -> {
             var user = (Entity) x;
-            var r = new StudentDtoNoScore(user.getId(), user.getUsername());
+            var r = new StudentDtoNoScore(user.getId(), user.getUsername(), user.getGitName());
             return r;
         }).collect(Collectors.toList()));
         return ret;

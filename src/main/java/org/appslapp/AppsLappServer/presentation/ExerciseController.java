@@ -90,6 +90,7 @@ public class ExerciseController {
             exercise.setDescription(body.getExercise().getDescription());
             exercise.setName(body.getExercise().getName());
             exercise.setRequiredStars(body.getExercise().getRequiredStars());
+            exercise.setHint(body.getHint());
 
             group.getExercises().add(exercise);
 
