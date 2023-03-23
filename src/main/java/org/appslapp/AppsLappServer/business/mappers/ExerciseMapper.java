@@ -11,7 +11,6 @@ public class ExerciseMapper {
         exerciseDto.setRequiredStars(exercise.getRequiredStars());
         exerciseDto.setGroupName(exercise.getGroupOfExercises().getName());
         exerciseDto.setId(exercise.getId());
-        exerciseDto.setHint(exercise.getHint());
         return exerciseDto;
     }
 }

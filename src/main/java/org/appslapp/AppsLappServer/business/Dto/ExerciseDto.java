@@ -10,6 +10,5 @@ public class ExerciseDto {
     private String description;
     private int requiredStars;
     private String groupName;
-    private String hint;
     private Long id;
 }
