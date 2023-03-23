@@ -6,9 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ExerciseDto {
-    String name;
-    String description;
-    int requiredStars;
-    String groupName;
-    Long id;
+    private String name;
+    private String description;
+    private int requiredStars;
+    private String groupName;
+    private String hint;
+    private Long id;
 }

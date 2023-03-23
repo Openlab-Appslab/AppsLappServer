@@ -65,9 +65,9 @@ public class ExerciseController {
         var exercise = exerciseService.getExercise(id);
         var user = userService.getUserByName(body.getUsername());
         var exercises = user.getHintedExercises();
-        exercises.add(exercise.getId());
-        user.setHintedExercises(exercises);
-        userService.save(user);
+        // exercises.add(exercise.getId());
+        // user.setHintedExercises(exercises);
+        // userService.save(user);
         return new Hint(exercise.getHint());
     }
 
