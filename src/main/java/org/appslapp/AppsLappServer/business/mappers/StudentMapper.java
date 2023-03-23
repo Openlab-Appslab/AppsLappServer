@@ -11,7 +11,7 @@ public class StudentMapper {
         studentDto.setName(student.getUsername());
         studentDto.setExercises(new ArrayList<>());
         studentDto.setAwards(new ArrayList<>());
-
+        studentDto.setGitName(student.getGitName());
         var score = 0;
         for (var i : student.getLab().getGroupOfExercises()) {
             var done = 0;

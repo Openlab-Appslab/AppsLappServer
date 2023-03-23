@@ -33,6 +33,8 @@ public class Entity {
 
     private String password;
 
+    private String gitName;
+
     @JsonIgnore
     private String authority;
 

@@ -10,4 +10,5 @@ import lombok.Setter;
 public class StudentDtoNoScore {
     private Long id;
     private String name;
+    private String gitName;
 }

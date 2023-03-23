@@ -10,6 +10,7 @@ import java.util.List;
 public class StudentDto {
     private Long id;
     private String name;
+    private String gitName;
     private int score;
     private List<String> awards;
     private List<ExerciseStudentDto> exercises;
