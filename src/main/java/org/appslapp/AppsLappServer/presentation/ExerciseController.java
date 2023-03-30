@@ -46,7 +46,7 @@ public class ExerciseController {
 
     @GetMapping
     public List<ExerciseDto> getAllExercises() {
-        return exerciseService.getAllExercises().stream().map(ExerciseMapper::map).collect(Collectors.toList());
+        return exerciseService.getAllExercises().stream().map(ExerciseMapper::mapNoHint).collect(Collectors.toList());
     }
 
     @PostMapping("updateScore")

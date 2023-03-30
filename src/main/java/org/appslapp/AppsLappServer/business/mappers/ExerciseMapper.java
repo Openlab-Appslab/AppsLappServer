@@ -14,4 +14,14 @@ public class ExerciseMapper {
         exerciseDto.setHint(exercise.getHint());
         return exerciseDto;
     }
+
+    public static ExerciseDto mapNoHint(Exercise exercise) {
+        ExerciseDto exerciseDto = new ExerciseDto();
+        exerciseDto.setName(exercise.getName());
+        exerciseDto.setDescription(exercise.getDescription());
+        exerciseDto.setRequiredStars(exercise.getRequiredStars());
+        exerciseDto.setGroupName(exercise.getGroupOfExercises().getName());
+        exerciseDto.setId(exercise.getId());
+        return exerciseDto;
+    }
 }
