@@ -33,6 +33,6 @@ public class GroupOfExercisesService {
     }
 
     public List<GroupOfExercises> findAll() {
-        return groupOfExercisesRepository.findAll();
+        return groupOfExercisesRepository.findAllOrderByDeadline();
     }
 }

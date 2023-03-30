@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface ExerciseRepository extends CrudRepository<Exercise, Long> {
-    List<Exercise> findAll();
-
     Optional<Exercise> findByName(String exerciseName);
+
+    List<Exercise> findAll();
 
     void deleteByName(String exerciseName);
 }
