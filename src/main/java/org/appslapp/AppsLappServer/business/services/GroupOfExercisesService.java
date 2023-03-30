@@ -34,6 +34,6 @@ public class GroupOfExercisesService {
     }
 
     public List<GroupOfExercises> findAll() {
-        return groupOfExercisesRepository.findAllByOrderBy();
+        return groupOfExercisesRepository.findAllByOrderByDescriptionDesc();
     }
 }
