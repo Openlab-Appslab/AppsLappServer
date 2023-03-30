@@ -4,6 +4,7 @@ import org.appslapp.AppsLappServer.business.pojo.GroupOfExercises;
 import org.appslapp.AppsLappServer.exceptions.GroupOfExercisesNotFoundException;
 import org.appslapp.AppsLappServer.persistance.GroupOfExercisesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,6 @@ public class GroupOfExercisesService {
     }
 
     public List<GroupOfExercises> findAll() {
-        return groupOfExercisesRepository.findAllOrderByDeadline();
+        return groupOfExercisesRepository.findAllByOrderBy();
     }
 }
