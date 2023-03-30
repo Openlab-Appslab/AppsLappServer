@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface GroupOfExercisesRepository extends CrudRepository<GroupOfExercises, Long> {
     Optional<GroupOfExercises> findByName(String name);
-    List<GroupOfExercises> findAllByOrderByDescriptionDesc();
+    List<GroupOfExercises> findAllByOrderByDeadlineDesc();
 }
