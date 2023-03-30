@@ -7,15 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ExerciseService {
     private final ExerciseRepository exerciseRepository;
     private final GroupOfExercisesService service;
+    private final UserService userService;
 
     @Autowired
-    public ExerciseService(ExerciseRepository exerciseRepository, GroupOfExercisesService service) {
+    public ExerciseService(ExerciseRepository exerciseRepository, GroupOfExercisesService service, UserService userService) {
         this.exerciseRepository = exerciseRepository;
+        this.userService = userService;
         this.service = service;
     }
 
@@ -38,6 +41,13 @@ public class ExerciseService {
     }
 
     public void deleteExercise(String exerciseName) {
-        exerciseRepository.findByName(exerciseName).ifPresent(exerciseRepository::delete);
+        exerciseRepository.findByName(exerciseName).ifPresent(e -> {
+            var studentNames = e.getGroupOfExercises().getLab().getStudentNames();
+            for(var student : studentNames) {
+                student.setDoneExercises(student.getDoneExercises().stream().filter(ex -> ex.getId() != e.getId()).collect(Collectors.toList()));
+                userService.save(student);
+            }
+            exerciseRepository.delete(e);
+        });
     }
 }
