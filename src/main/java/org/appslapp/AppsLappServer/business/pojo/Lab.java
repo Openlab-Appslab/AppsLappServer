@@ -25,6 +25,8 @@ public class Lab {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private String description;
+
     @JsonIgnore
     @ManyToOne
     @Fetch(FetchMode.JOIN)
