@@ -1,5 +1,6 @@
 package org.appslapp.AppsLappServer.business.services;
 
+import org.appslapp.AppsLappServer.business.Dto.GroupOfExercisesDto;
 import org.appslapp.AppsLappServer.business.Dto.LabDto;
 import org.appslapp.AppsLappServer.business.Dto.StudentDto;
 import org.appslapp.AppsLappServer.business.Dto.StudentDtoNoScore;
@@ -54,7 +55,10 @@ public class LabService {
         ret.setName(l.getName());
         var goe = l.getGroupOfExercises();
 
-        ret.setGroupOfExercises(goe.stream().map(GroupMapper::map).collect(Collectors.toList()));
+        ret.setGroupOfExercises(goe.stream()
+            .map(GroupMapper::map)
+            .sorted(Comparator.comparingLong(GroupOfExercisesDto::getDeadline))
+            .collect(Collectors.toList()));
 
         ret.setId(l.getId());
         ret.setLabmaster(l.getLabmaster());
@@ -63,7 +67,6 @@ public class LabService {
             var r = new StudentDtoNoScore(user.getId(), user.getUsername(), user.getGitName());
             return r;
         }).collect(Collectors.toList()));
-
 
         return ret;
     }
