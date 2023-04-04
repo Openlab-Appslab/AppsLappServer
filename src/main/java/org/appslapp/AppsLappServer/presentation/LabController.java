@@ -18,6 +18,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,7 +70,10 @@ public class LabController {
 
     @GetMapping("getAllGroups")
     public List<GroupOfExercisesDto> getAllGroups() {
-        return groupOfExercisesService.findAll().stream().map(GroupMapper::map).collect(Collectors.toList());
+        return groupOfExercisesService.findAll().stream()
+            .map(GroupMapper::map)
+            .sorted(Comparator.comparingLong(GroupOfExercisesDto::getDeadline))
+            .collect(Collectors.toList());
     }
 
     @PostMapping("createGroupOfExercises")
