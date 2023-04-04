@@ -1,14 +1,17 @@
 package org.appslapp.AppsLappServer.business.services;
 
 import org.appslapp.AppsLappServer.business.Dto.LabDto;
+import org.appslapp.AppsLappServer.business.Dto.StudentDto;
 import org.appslapp.AppsLappServer.business.Dto.StudentDtoNoScore;
 import org.appslapp.AppsLappServer.business.pojo.Lab;
 import org.appslapp.AppsLappServer.business.pojo.users.entity.Entity;
+import org.appslapp.AppsLappServer.business.pojo.users.user.User;
 import org.appslapp.AppsLappServer.exceptions.LabNotFoundException;
 import org.appslapp.AppsLappServer.persistance.LabRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -51,7 +54,7 @@ public class LabService {
         ret.setGroupOfExercises(l.getGroupOfExercises());
         ret.setId(l.getId());
         ret.setLabmaster(l.getLabmaster());
-        ret.setStudentNames(l.getStudentNames().stream().map(x -> {
+        ret.setStudentNames(l.getStudentNames().stream().sorted(Comparator.comparingInt(User::getScore)).map(x -> {
             var user = (Entity) x;
             var r = new StudentDtoNoScore(user.getId(), user.getUsername(), user.getGitName());
             return r;

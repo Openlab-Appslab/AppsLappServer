@@ -1,8 +1,10 @@
 package org.appslapp.AppsLappServer.presentation;
 
+import org.appslapp.AppsLappServer.business.Dto.GroupOfExercisesDto;
 import org.appslapp.AppsLappServer.business.Dto.LabDto;
 import org.appslapp.AppsLappServer.business.helper.CreateLabHelper;
 import org.appslapp.AppsLappServer.business.helper.GroupOfExercisesToLabHelper;
+import org.appslapp.AppsLappServer.business.mappers.GroupMapper;
 import org.appslapp.AppsLappServer.business.pojo.GroupOfExercises;
 import org.appslapp.AppsLappServer.business.services.GroupOfExercisesService;
 import org.appslapp.AppsLappServer.business.pojo.Lab;
@@ -66,8 +68,8 @@ public class LabController {
     }
 
     @GetMapping("getAllGroups")
-    public List<GroupOfExercises> getAllGroups() {
-        return groupOfExercisesService.findAll();
+    public List<GroupOfExercisesDto> getAllGroups() {
+        return groupOfExercisesService.findAll().stream().map(GroupMapper::map).collect(Collectors.toList());
     }
 
     @PostMapping("createGroupOfExercises")
