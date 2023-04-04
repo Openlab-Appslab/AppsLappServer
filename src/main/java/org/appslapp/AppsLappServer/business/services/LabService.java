@@ -54,7 +54,7 @@ public class LabService {
         ret.setGroupOfExercises(l.getGroupOfExercises());
         ret.setId(l.getId());
         ret.setLabmaster(l.getLabmaster());
-        ret.setStudentNames(l.getStudentNames().stream().sorted(Comparator.comparingInt(User::getScore)).map(x -> {
+        ret.setStudentNames(l.getStudentNames().stream().sorted(Comparator.comparingInt(User::getScore).reversed()).map(x -> {
             var user = (Entity) x;
             var r = new StudentDtoNoScore(user.getId(), user.getUsername(), user.getGitName());
             return r;
