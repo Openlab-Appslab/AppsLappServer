@@ -17,5 +17,5 @@ public class LabDto {
 
     private String name;
 
-    private List<GroupOfExercises> groupOfExercises;
+    private List<GroupOfExercisesDto> groupOfExercises;
 }

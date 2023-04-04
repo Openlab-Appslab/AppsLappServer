@@ -3,6 +3,7 @@ package org.appslapp.AppsLappServer.business.services;
 import org.appslapp.AppsLappServer.business.Dto.LabDto;
 import org.appslapp.AppsLappServer.business.Dto.StudentDto;
 import org.appslapp.AppsLappServer.business.Dto.StudentDtoNoScore;
+import org.appslapp.AppsLappServer.business.mappers.GroupMapper;
 import org.appslapp.AppsLappServer.business.pojo.Lab;
 import org.appslapp.AppsLappServer.business.pojo.users.entity.Entity;
 import org.appslapp.AppsLappServer.business.pojo.users.user.User;
@@ -51,7 +52,10 @@ public class LabService {
         var l = lab.get();
         var ret = new LabDto();
         ret.setName(l.getName());
-        ret.setGroupOfExercises(l.getGroupOfExercises());
+        var goe = l.getGroupOfExercises();
+
+        ret.setGroupOfExercises(goe.stream().map(GroupMapper::map).collect(Collectors.toList()));
+
         ret.setId(l.getId());
         ret.setLabmaster(l.getLabmaster());
         ret.setStudentNames(l.getStudentNames().stream().sorted(Comparator.comparingInt(User::getScore).reversed()).map(x -> {
@@ -59,6 +63,8 @@ public class LabService {
             var r = new StudentDtoNoScore(user.getId(), user.getUsername(), user.getGitName());
             return r;
         }).collect(Collectors.toList()));
+
+
         return ret;
     }
 }
